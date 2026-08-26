@@ -6,316 +6,542 @@
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
   <meta http-equiv="Pragma" content="no-cache">
   <meta http-equiv="Expires" content="0">
-  <title>SAVERZ | ساورز؛ ستیغ ۳۲۰۰ متری زاگرس جنوبی</title>
-  <meta name="description" content="تجربه سه‌بعدی و تعاملی کوهستان ساورز با الگوریتم‌های پرلین نویز و شبیه‌سازی ژئومورفولوژی زاگرس.">
+  <title>SAVERZ.SHOP // Sam Mousavi</title>
+  <meta name="description" content="SAVERZ SOVEREIGN NODE • Owner: Sam Mousavi • Mount Saverz 3,200m Terminal">
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@200;300;400;600;700;800;900&family=Cinzel:wght@500;700;800;900&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
-  
-  <!-- Local Three.js + CDN Fallback -->
-  <script src="/js/three.min.js"></script>
-  <script src="/static/js/three.min.js"></script>
-  <script>
-    if (typeof THREE === 'undefined') {
-      document.write('<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"><\/script>');
-    }
-  </script>
-
-  <link rel="stylesheet" href="/css/style.css">
-  <link rel="stylesheet" href="/static/css/style.css">
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏔️</text></svg>">
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600;700&family=Vazirmatn:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
 
   <style>
     /* ==========================================================================
-       AWWWARDS THREE.JS 3D TERRAIN CORE EMBEDDED STYLING
+       CLASSIC HIGH-END CODE TERMINAL & SYNTAX HIGHLIGHTER (DRACULA / TOKYO NIGHT)
+       Owner: Sam Mousavi • Saverz Mountain Node
        ========================================================================== */
     :root {
-      --bg-primary: #0D0F0E;
-      --bg-secondary: #141715;
-      --text-main: #F4F2EC;
-      --text-muted: #8E968F;
-      --text-light: #5A625C;
-      --accent-gold: #C5A059;
-      --border-fine: rgba(244, 242, 236, 0.08);
-      --border-gold: rgba(197, 160, 89, 0.3);
+      --term-bg: #0C0E0D;
+      --term-card: #131714;
+      --term-header: #1A1F1B;
+      --term-border: #232B25;
+      
+      --syn-keyword: #FF79C6;      /* Magenta Keyword (fn, struct, let, const) */
+      --syn-func: #50FA7B;         /* Neon Green Function */
+      --syn-type: #8BE9FD;         /* Cyan Type / Struct */
+      --syn-string: #F1FA8C;       /* Yellow / Amber String */
+      --syn-comment: #6272A4;      /* Muted Slate Comment */
+      --syn-number: #BD93F9;       /* Purple Number / Constant */
+      --syn-gold: #FFB86C;         /* Orange / Gold Highlight */
+      --syn-text: #F8F8F2;         /* Pure Bright Text */
+      
+      --font-code: 'Fira Code', 'Cascadia Code', 'Consolas', monospace;
       --font-persian: 'Vazirmatn', -apple-system, BlinkMacSystemFont, sans-serif;
-      --font-serif: 'Cinzel', serif;
-      --font-mono: 'Space Grotesk', monospace;
-      --transition-smooth: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
-    * { margin: 0; padding: 0; box-sizing: border-box; font-family: var(--font-persian); }
-    html { scroll-behavior: smooth; background-color: var(--bg-primary); color: var(--text-main); }
-    body { direction: rtl; text-align: right; overflow-x: hidden; background: var(--bg-primary); min-height: 100vh; }
-
-    #webgl-canvas-container {
-      position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-      z-index: 1; pointer-events: all;
-      background: radial-gradient(circle at 50% 30%, #151A17 0%, #0D0F0E 80%);
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
     }
 
-    .experience-overlay { position: relative; z-index: 10; pointer-events: none; }
-    .interactive-element { pointer-events: all; }
-    .container { max-width: 1360px; margin: 0 auto; padding: 0 40px; }
-    .font-mono { font-family: var(--font-mono); direction: ltr; display: inline-block; }
-    .font-serif { font-family: var(--font-serif); }
-
-    /* HUD Navbar */
-    .hud-navbar {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-      padding: 32px 40px; display: flex; justify-content: space-between; align-items: center;
+    html, body {
+      background-color: var(--term-bg);
+      color: var(--syn-text);
+      font-family: var(--font-code);
+      min-height: 100vh;
+      overflow-x: hidden;
+      direction: ltr;
+      text-align: left;
     }
-    .hud-brand { display: flex; align-items: baseline; gap: 16px; }
-    .hud-title { font-family: var(--font-serif); font-size: 1.8rem; font-weight: 800; letter-spacing: 6px; color: var(--text-main); }
-    .hud-badge { font-family: var(--font-mono); font-size: 0.75rem; color: var(--accent-gold); border: 1px solid var(--border-gold); padding: 3px 10px; letter-spacing: 1px; }
 
-    .hud-controls-right { display: flex; align-items: center; gap: 16px; }
-    .hud-btn {
-      background: rgba(20, 23, 21, 0.75); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
-      border: 1px solid var(--border-fine); color: var(--text-main);
-      padding: 10px 20px; font-size: 0.82rem; font-weight: 600; border-radius: 2px;
-      display: flex; align-items: center; gap: 10px; cursor: pointer; transition: var(--transition-smooth);
+    /* Ambient Matrix Glow */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background: radial-gradient(circle at 50% 20%, rgba(80, 250, 123, 0.04) 0%, transparent 60%),
+                  radial-gradient(circle at 80% 80%, rgba(139, 233, 253, 0.03) 0%, transparent 60%);
+      pointer-events: none;
+      z-index: 0;
     }
-    .hud-btn:hover { border-color: var(--accent-gold); color: var(--accent-gold); transform: translateY(-1px); }
-    .hud-pulse-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent-gold); box-shadow: 0 0 10px var(--accent-gold); animation: pulseDot 1.6s infinite; }
-    .hud-pulse-dot.paused { animation: none; background: var(--text-light); box-shadow: none; }
-    @keyframes pulseDot { 0% { transform: scale(0.9); opacity: 0.5; } 50% { transform: scale(1.4); opacity: 1; } 100% { transform: scale(0.9); opacity: 0.5; } }
 
-    /* Hero */
-    .hero-fullscreen { min-height: 100vh; display: flex; flex-direction: column; justify-content: flex-end; padding-bottom: 80px; }
-    .hero-coordinates-tag { font-family: var(--font-mono); font-size: 0.85rem; color: var(--accent-gold); letter-spacing: 2px; margin-bottom: 20px; display: block; }
-    .hero-mega-headline { font-size: 6.5rem; font-weight: 900; line-height: 1.05; letter-spacing: -2.5px; color: var(--text-main); margin-bottom: 24px; text-shadow: 0 4px 40px rgba(0,0,0,0.8); }
-    .hero-mega-headline span.gold { color: var(--accent-gold); font-weight: 800; }
-    .hero-sub-statement { font-size: 1.35rem; font-weight: 300; color: var(--text-muted); max-width: 640px; line-height: 1.85; margin-bottom: 40px; text-shadow: 0 2px 20px rgba(0,0,0,0.6); }
-
-    .telemetry-strip { display: flex; align-items: center; gap: 40px; padding-top: 24px; border-top: 1px solid var(--border-fine); font-family: var(--font-mono); font-size: 0.85rem; }
-    .telemetry-item { display: flex; align-items: baseline; gap: 10px; }
-    .telemetry-val { font-size: 1.25rem; font-weight: 700; color: var(--text-main); }
-    .telemetry-lbl { color: var(--text-light); font-size: 0.75rem; letter-spacing: 1px; }
-
-    /* 3D Hint Widget */
-    .terrain-control-widget {
-      position: fixed; bottom: 40px; left: 40px; z-index: 100;
-      background: rgba(20, 23, 21, 0.85); backdrop-filter: blur(16px);
-      border: 1px solid var(--border-fine); padding: 16px 20px; border-radius: 4px;
-      display: flex; align-items: center; gap: 20px; font-family: var(--font-mono); font-size: 0.8rem; color: var(--text-muted);
+    .terminal-wrapper {
+      position: relative;
+      z-index: 10;
+      max-width: 1100px;
+      margin: 40px auto;
+      padding: 0 20px 80px;
     }
-    .widget-hint { color: var(--accent-gold); display: flex; align-items: center; gap: 8px; }
 
-    /* Chapters */
-    .chapter-section { min-height: 100vh; display: flex; align-items: center; padding: 100px 0; }
-    .chapter-card-minimal {
-      background: rgba(18, 21, 19, 0.84); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-      border: 1px solid var(--border-fine); padding: 60px; max-width: 680px; border-radius: 2px;
-      box-shadow: 0 20px 60px rgba(0,0,0,0.5); position: relative;
+    /* Terminal Window Frame */
+    .terminal-window {
+      background: var(--term-card);
+      border: 1px solid var(--term-border);
+      border-radius: 8px;
+      box-shadow: 0 24px 80px rgba(0, 0, 0, 0.85), 0 0 1px rgba(80, 250, 123, 0.2);
+      overflow: hidden;
     }
-    .chapter-card-minimal::before { content: ''; position: absolute; top: 0; right: 0; width: 40px; height: 2px; background: var(--accent-gold); }
-    .chapter-number { font-family: var(--font-mono); font-size: 0.82rem; color: var(--accent-gold); letter-spacing: 3px; margin-bottom: 16px; display: block; }
-    .chapter-title { font-size: 2.8rem; font-weight: 800; color: var(--text-main); line-height: 1.2; margin-bottom: 20px; letter-spacing: -0.5px; }
-    .chapter-desc { font-size: 1.15rem; color: var(--text-muted); line-height: 1.9; margin-bottom: 30px; font-weight: 300; }
-    .chapter-stat-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; padding-top: 24px; border-top: 1px solid var(--border-fine); }
-    .chapter-stat-val { font-family: var(--font-mono); font-size: 1.5rem; font-weight: 700; color: var(--text-main); margin-bottom: 4px; }
-    .chapter-stat-lbl { font-size: 0.8rem; color: var(--text-light); }
 
-    /* Modal */
-    .modal-backdrop {
-      position: fixed; inset: 0; background: rgba(10, 12, 11, 0.95); backdrop-filter: blur(20px);
-      z-index: 2000; display: flex; align-items: center; justify-content: center; padding: 30px;
-      opacity: 0; visibility: hidden; transition: var(--transition-smooth);
+    /* Window Title Bar */
+    .window-titlebar {
+      background: var(--term-header);
+      padding: 12px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--term-border);
+      user-select: none;
     }
-    .modal-backdrop.open { opacity: 1; visibility: visible; }
-    .modal-box { background: #141715; border: 1px solid var(--border-fine); padding: 48px; max-width: 540px; width: 100%; border-radius: 2px; box-shadow: 0 30px 90px rgba(0,0,0,0.8); }
-    .form-group-field { display: flex; flex-direction: column; gap: 8px; margin-bottom: 18px; }
-    .form-label-hud { font-size: 0.8rem; font-weight: 600; color: var(--accent-gold); letter-spacing: 1px; }
-    .input-hud { background: #0D0F0E; border: 1px solid var(--border-fine); padding: 14px 16px; color: var(--text-main); font-size: 0.95rem; outline: none; border-radius: 2px; transition: var(--transition-smooth); }
-    .input-hud:focus { border-color: var(--accent-gold); }
-    .btn-hud-submit { width: 100%; background: var(--accent-gold); color: #0D0F0E; padding: 16px; font-size: 1rem; font-weight: 700; border-radius: 2px; cursor: pointer; margin-top: 10px; transition: var(--transition-smooth); border: none; }
-    .btn-hud-submit:hover { background: #DFCA9E; }
 
-    @media (max-width: 1024px) { .hero-mega-headline { font-size: 4.2rem; } .chapter-card-minimal { padding: 40px; } .telemetry-strip { flex-wrap: wrap; gap: 20px; } }
-    @media (max-width: 768px) { .hero-mega-headline { font-size: 2.8rem; } .hud-navbar { padding: 20px; } .container { padding: 0 20px; } .chapter-card-minimal { padding: 28px; } .terrain-control-widget { display: none; } }
+    .window-controls {
+      display: flex;
+      gap: 8px;
+    }
+
+    .ctrl-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      display: inline-block;
+    }
+
+    .ctrl-close { background: #FF5F56; }
+    .ctrl-min { background: #FFBD2E; }
+    .ctrl-max { background: #27C93F; }
+
+    .window-title {
+      font-size: 0.82rem;
+      font-weight: 500;
+      color: var(--syn-comment);
+      letter-spacing: 0.5px;
+    }
+
+    .window-tag {
+      font-size: 0.75rem;
+      color: var(--syn-func);
+      background: rgba(80, 250, 123, 0.1);
+      padding: 2px 8px;
+      border-radius: 3px;
+      border: 1px solid rgba(80, 250, 123, 0.2);
+    }
+
+    /* Terminal Body */
+    .terminal-body {
+      padding: 32px;
+      font-size: 0.94rem;
+      line-height: 1.7;
+    }
+
+    /* Owner & System Banner */
+    .ascii-banner {
+      color: var(--syn-gold);
+      font-size: 0.72rem;
+      line-height: 1.15;
+      margin-bottom: 24px;
+      white-space: pre;
+      user-select: none;
+      filter: drop-shadow(0 0 8px rgba(255, 184, 108, 0.3));
+    }
+
+    .meta-box {
+      border: 1px solid var(--term-border);
+      background: rgba(10, 13, 11, 0.6);
+      padding: 16px 20px;
+      border-radius: 4px;
+      margin-bottom: 28px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 12px;
+      font-size: 0.85rem;
+    }
+
+    .meta-item {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .meta-label {
+      color: var(--syn-comment);
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .meta-value {
+      color: var(--syn-text);
+      font-weight: 600;
+    }
+
+    .meta-value.owner {
+      color: var(--syn-func);
+      font-weight: 700;
+      font-size: 0.95rem;
+    }
+
+    /* Code Block / Syntax Highlighting Area */
+    .code-container {
+      background: #080A09;
+      border: 1px solid var(--term-border);
+      border-radius: 6px;
+      padding: 24px;
+      margin-bottom: 30px;
+      overflow-x: auto;
+    }
+
+    .code-line {
+      display: flex;
+      align-items: baseline;
+      min-height: 24px;
+    }
+
+    .line-num {
+      width: 36px;
+      color: #38423B;
+      user-select: none;
+      text-align: right;
+      margin-right: 18px;
+      font-size: 0.82rem;
+    }
+
+    .line-content {
+      color: var(--syn-text);
+      flex: 1;
+    }
+
+    /* Syntax Tokens */
+    .kwd { color: var(--syn-keyword); font-weight: 600; }
+    .fn { color: var(--syn-func); font-weight: 600; }
+    .typ { color: var(--syn-type); }
+    .str { color: var(--syn-string); }
+    .num { color: var(--syn-number); }
+    .comm { color: var(--syn-comment); font-style: italic; }
+    .gold { color: var(--syn-gold); }
+    .fa { font-family: var(--font-persian); direction: rtl; display: inline-block; }
+
+    /* Interactive Command Prompt */
+    .interactive-cli {
+      border-top: 1px solid var(--term-border);
+      padding-top: 24px;
+    }
+
+    .prompt-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.95rem;
+      margin-bottom: 12px;
+    }
+
+    .prompt-user {
+      color: var(--syn-func);
+      font-weight: 700;
+    }
+
+    .prompt-path {
+      color: var(--syn-type);
+    }
+
+    .prompt-char {
+      color: var(--syn-gold);
+    }
+
+    .cmd-input {
+      background: transparent;
+      border: none;
+      color: var(--syn-string);
+      font-family: var(--font-code);
+      font-size: 0.95rem;
+      outline: none;
+      flex: 1;
+      caret-color: var(--syn-func);
+    }
+
+    .cmd-history-output {
+      margin-bottom: 16px;
+      font-size: 0.88rem;
+      line-height: 1.6;
+    }
+
+    .quick-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 20px;
+      padding-top: 16px;
+      border-top: 1px dashed var(--term-border);
+    }
+
+    .action-btn {
+      background: #171C18;
+      border: 1px solid var(--term-border);
+      color: var(--syn-type);
+      padding: 6px 14px;
+      border-radius: 3px;
+      font-size: 0.8rem;
+      font-family: var(--font-code);
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .action-btn:hover {
+      border-color: var(--syn-func);
+      color: var(--syn-func);
+      background: rgba(80, 250, 123, 0.08);
+    }
+
+    /* Persian Tooltip Card */
+    .persian-summary-card {
+      font-family: var(--font-persian);
+      direction: rtl;
+      text-align: right;
+      background: rgba(19, 23, 20, 0.9);
+      border: 1px solid var(--term-border);
+      border-right: 3px solid var(--syn-gold);
+      padding: 20px 24px;
+      border-radius: 4px;
+      margin-top: 24px;
+      font-size: 0.95rem;
+      line-height: 1.85;
+      color: #D1DDD3;
+    }
+
+    .persian-summary-card strong {
+      color: var(--syn-gold);
+    }
+
+    @media (max-width: 768px) {
+      .terminal-wrapper { margin: 10px auto; padding: 0 10px 40px; }
+      .terminal-body { padding: 18px; font-size: 0.82rem; }
+      .ascii-banner { font-size: 0.45rem; }
+      .code-container { padding: 14px; }
+      .line-num { margin-right: 8px; width: 24px; }
+    }
   </style>
 </head>
 <body>
 
-  <!-- Fullscreen 3D Three.js Procedural Terrain Canvas -->
-  <div id="webgl-canvas-container"></div>
-
-  <!-- HUD Navigation Bar -->
-  <header class="hud-navbar interactive-element">
-    <div class="hud-brand">
-      <span class="hud-title">SAVERZ</span>
-      <span class="hud-badge font-mono">30°48′N 50°49′E</span>
-    </div>
-
-    <div class="hud-controls-right">
-      <button id="btn-audio-pulse" class="hud-btn">
-        <span id="hud-pulse-dot" class="hud-pulse-dot paused"></span>
-        <span id="hud-pulse-text">صوت کوهستان</span>
-      </button>
-
-      <button id="btn-open-inquiry" class="hud-btn" style="border-color: var(--border-gold); color: var(--accent-gold);">
-        <span>ارتباط و پیام</span>
-      </button>
-    </div>
-  </header>
-
-  <!-- 3D Interactive Controls Widget -->
-  <div class="terrain-control-widget font-mono interactive-element">
-    <span class="widget-hint">❖ 3D TERRAIN LIVE</span>
-    <span>DRAG TO ROTATE 360°</span>
-    <span>SCROLL TO FLY</span>
-  </div>
-
-  <!-- Scrollable Experience Content Overlay -->
-  <main class="experience-overlay">
-
-    <!-- Hero Slide -->
-    <section class="hero-fullscreen">
-      <div class="container">
-        <span class="hero-coordinates-tag font-mono">ZAGROS MOUNTAIN RIDGE • ELEVATION 3,200M</span>
-        <h1 class="hero-mega-headline">
-          ساورز؛ <span class="gold">ستیغ آرامش</span> و سنگ
-        </h1>
-        <p class="hero-sub-statement">
-          روایتی مینیمال از ستیغ ۳۲۰۰ متری کارستی، چشمه‌های ابدی طسوج و فلات بکر دشت راق در سرحدات زاگرس جنوبی.
-        </p>
-
-        <div class="telemetry-strip font-mono">
-          <div class="telemetry-item">
-            <span class="telemetry-val">۳,۲۰۰ M</span>
-            <span class="telemetry-lbl">ALTITUDE</span>
-          </div>
-          <div class="telemetry-item">
-            <span class="telemetry-val">۳۰+ KM</span>
-            <span class="telemetry-lbl">RIDGE LENGTH</span>
-          </div>
-          <div class="telemetry-item">
-            <span class="telemetry-val">۲,۵۰۰ M</span>
-            <span class="telemetry-lbl">PLATEAU HEIGHT</span>
-          </div>
-          <div class="telemetry-item">
-            <span class="telemetry-val">۳۵۰K HA</span>
-            <span class="telemetry-lbl">BASIN AREA</span>
-          </div>
+  <div class="terminal-wrapper">
+    <div class="terminal-window">
+      
+      <!-- Titlebar -->
+      <div class="window-titlebar">
+        <div class="window-controls">
+          <span class="ctrl-dot ctrl-close"></span>
+          <span class="ctrl-dot ctrl-min"></span>
+          <span class="ctrl-dot ctrl-max"></span>
         </div>
-      </div>
-    </section>
-
-    <!-- Chapter 1: Geometry & Ridge -->
-    <section class="chapter-section">
-      <div class="container">
-        <div class="chapter-card-minimal interactive-element">
-          <span class="chapter-number">CHAPTER 01 / GEOMETRY</span>
-          <h2 class="chapter-title">هندسه صخره‌ها و خط‌الرأس کارست</h2>
-          <p class="chapter-desc">
-            دیواره‌های آهکی آسماری با امتداد ۳۰ کیلومتر که مرز کهن چرام و بویراحمد را شکل داده‌اند. مدفن یخچال‌های طبیعی، غارهای برفی و زیستگاه کل و بز وحشی زاگرس.
-          </p>
-          <div class="chapter-stat-grid font-mono">
-            <div>
-              <div class="chapter-stat-val">3,200 M</div>
-              <div class="chapter-stat-lbl">PEAK PINNACLE</div>
-            </div>
-            <div>
-              <div class="chapter-stat-val">ASMARI</div>
-              <div class="chapter-stat-lbl">GEOLOGY MATRIX</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Chapter 2: Living Water & Cascades -->
-    <section class="chapter-section">
-      <div class="container">
-        <div class="chapter-card-minimal interactive-element" style="margin-right: auto;">
-          <span class="chapter-number">CHAPTER 02 / HYDROLOGY</span>
-          <h2 class="chapter-title">برج آب زاگرس و آبشار الوان</h2>
-          <p class="chapter-desc">
-            چشمه‌های خروشان طسوج، سیب و چرنگی که از مخازن آهکی ساورز سرچشمه گرفته و با عبور از آبشار الوان و باغات کهنسال گردو، شریان‌های حیات جنوب‌غرب را پدید می‌آورند.
-          </p>
-          <div class="chapter-stat-grid font-mono">
-            <div>
-              <div class="chapter-stat-val">2,400 M</div>
-              <div class="chapter-stat-lbl">TASOOJ SPRINGS</div>
-            </div>
-            <div>
-              <div class="chapter-stat-val">PERENNIAL</div>
-              <div class="chapter-stat-lbl">WATER CYCLE</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Chapter 3: High Plateau & Solitude -->
-    <section class="chapter-section">
-      <div class="container">
-        <div class="chapter-card-minimal interactive-element">
-          <span class="chapter-number">CHAPTER 03 / SOLITUDE</span>
-          <h2 class="chapter-title">فلات دشت راق و رویشگاه چویل</h2>
-          <p class="chapter-desc">
-            پهنه ۵۰ هزار هکتاری در ارتفاع ۲۸۰۰ متری؛ رویشگاه گیاهان نایاب چویل، بیلهر و لاله‌های واژگون، و اتراق‌گاه ییلاقی قرن‌ها فرهنگ عشایر اصیل لر.
-          </p>
-          <div class="chapter-stat-grid font-mono">
-            <div>
-              <div class="chapter-stat-val">2,800 M</div>
-              <div class="chapter-stat-lbl">PLATEAU ELEVATION</div>
-            </div>
-            <div>
-              <div class="chapter-stat-val">FLORA</div>
-              <div class="chapter-stat-lbl">CHEVIL & TULIP</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-  </main>
-
-  <!-- Modal / Contact Inquiry -->
-  <div id="inquiry-modal" class="modal-backdrop interactive-element">
-    <div class="modal-box">
-      <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 24px;">
-        <span class="font-mono" style="color: var(--accent-gold); font-size: 0.85rem; letter-spacing: 2px;">SAVERZ DIALOGUE</span>
-        <button id="btn-close-modal" style="color: var(--text-muted); font-size: 1.6rem; cursor: pointer;">✕</button>
+        <span class="window-title">sam@saverz-node: ~/saverz_core.rs — [Rust / Axum]</span>
+        <span class="window-tag">ONLINE • 3200M</span>
       </div>
 
-      <h3 style="font-size: 1.8rem; font-weight: 800; color: var(--text-main); margin-bottom: 12px;">ارتباط با مونوگراف ساورز</h3>
-      <p style="font-size: 0.95rem; color: var(--text-muted); margin-bottom: 24px; line-height: 1.7;">
-        برای ارسال پیام، تبادل دیدگاه‌های مستندسازی یا پژوهش پیرامون کوهستان ساورز.
-      </p>
+      <!-- Terminal Body -->
+      <div class="terminal-body">
+        
+        <!-- ASCII Mountain Art -->
+        <pre class="ascii-banner">
+   /\                                                    /\
+  /  \                  __  __  __                      /  \
+ / /\ \  _   _   ___   / / / / / /___ _____  ____  ____/ /\ \
+/ /  \ \/ \ / \ / _ \ / / / / / / __ `/ __ \/ __ \/ __ \/  \ \
+\ \  / /\_//\_//  __// /_/ /_/ / /_/ / /_/ / /_/ / /_/ /\  / /
+ \ \/ /        \___/ \____/\____/\__,_/\____/\____/\____/ \/ /
+  \  /           SAVERZ SOVEREIGN ALPINE NODE • 3,200M     \  /
+   \/                                                       \/
+        </pre>
 
-      <form id="hud-inquiry-form">
-        <div class="form-group-field">
-          <label class="form-label-hud">نام و نام خانوادگی</label>
-          <input type="text" id="form-name" class="input-hud" required placeholder="نام شما">
+        <!-- Owner & Node Metadata -->
+        <div class="meta-box">
+          <div class="meta-item">
+            <span class="meta-label">OWNER & ARCHITECT</span>
+            <span class="meta-value owner">Sam Mousavi</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">DOMAIN / NODE</span>
+            <span class="meta-value">saverz.shop</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">GEODETIC COORDINATES</span>
+            <span class="meta-value">30°48′N 50°49′E • 3,200M</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">GEOLOGY & BIOME</span>
+            <span class="meta-value">Asmari Karst • Zagros Alpine</span>
+          </div>
         </div>
 
-        <div class="form-group-field">
-          <label class="form-label-hud">شماره تماس یا ایمیل</label>
-          <input type="text" id="form-phone" class="input-hud" required placeholder="۰۹۱۲۳۴۵۶۷۸۹">
+        <!-- Syntax-Highlighted Code Editor -->
+        <div class="code-container">
+          <div class="code-line"><span class="line-num">01</span><span class="line-content"><span class="comm">//! =========================================================================</span></span></div>
+          <div class="code-line"><span class="line-num">02</span><span class="line-content"><span class="comm">//! MOUNT SAVERZ TOPOLOGY & HERITAGE MONOGRAPH</span></span></div>
+          <div class="code-line"><span class="line-num">03</span><span class="line-content"><span class="comm">//! Owner: Sam Mousavi &lt;sam@saverz.shop&gt;</span></span></div>
+          <div class="code-line"><span class="line-num">04</span><span class="line-content"><span class="comm">//! =========================================================================</span></span></div>
+          <div class="code-line"><span class="line-num">05</span><span class="line-content"></span></div>
+          <div class="code-line"><span class="line-num">06</span><span class="line-content"><span class="kwd">pub struct</span> <span class="typ">MountSaverz</span> {</span></div>
+          <div class="code-line"><span class="line-num">07</span><span class="line-content">&nbsp;&nbsp;&nbsp;&nbsp;<span class="kwd">pub</span> <span class="gold">owner</span>: <span class="typ">&amp;'static str</span>,</span></div>
+          <div class="code-line"><span class="line-num">08</span><span class="line-content">&nbsp;&nbsp;&nbsp;&nbsp;<span class="kwd">pub</span> <span class="gold">altitude_meters</span>: <span class="typ">u32</span>,</span></div>
+          <div class="code-line"><span class="line-num">09</span><span class="line-content">&nbsp;&nbsp;&nbsp;&nbsp;<span class="kwd">pub</span> <span class="gold">ridge_length_km</span>: <span class="typ">f32</span>,</span></div>
+          <div class="code-line"><span class="line-num">10</span><span class="line-content">&nbsp;&nbsp;&nbsp;&nbsp;<span class="kwd">pub</span> <span class="gold">plateau</span>: <span class="typ">&amp;'static str</span>,</span></div>
+          <div class="code-line"><span class="line-num">11</span><span class="line-content">&nbsp;&nbsp;&nbsp;&nbsp;<span class="kwd">pub</span> <span class="gold">hydrology</span>: <span class="typ">Vec</span>&lt;<span class="typ">&amp;'static str</span>&gt;,</span></div>
+          <div class="code-line"><span class="line-num">12</span><span class="line-content">&nbsp;&nbsp;&nbsp;&nbsp;<span class="kwd">pub</span> <span class="gold">rare_flora</span>: <span class="typ">Vec</span>&lt;<span class="typ">&amp;'static str</span>&gt;,</span></div>
+          <div class="code-line"><span class="line-num">13</span><span class="line-content">}</span></div>
+          <div class="code-line"><span class="line-num">14</span><span class="line-content"></span></div>
+          <div class="code-line"><span class="line-num">15</span><span class="line-content"><span class="kwd">impl</span> <span class="typ">MountSaverz</span> {</span></div>
+          <div class="code-line"><span class="line-num">16</span><span class="line-content">&nbsp;&nbsp;&nbsp;&nbsp;<span class="kwd">pub fn</span> <span class="fn">initialize_node</span>() -&gt; <span class="kwd">Self</span> {</span></div>
+          <div class="code-line"><span class="line-num">17</span><span class="line-content">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="kwd">Self</span> {</span></div>
+          <div class="code-line"><span class="line-num">18</span><span class="line-content">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="gold">owner</span>: <span class="str">"Sam Mousavi"</span>,</span></div>
+          <div class="code-line"><span class="line-num">19</span><span class="line-content">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="gold">altitude_meters</span>: <span class="num">3_200</span>,</span></div>
+          <div class="code-line"><span class="line-num">20</span><span class="line-content">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="gold">ridge_length_km</span>: <span class="num">32.4</span>,</span></div>
+          <div class="code-line"><span class="line-num">21</span><span class="line-content">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="gold">plateau</span>: <span class="str">"Dasht-e Raq (2,800m • 50,000 Hectares)"</span>,</span></div>
+          <div class="code-line"><span class="line-num">22</span><span class="line-content">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="gold">hydrology</span>: <span class="kwd">vec</span>![</span></div>
+          <div class="code-line"><span class="line-num">23</span><span class="line-content">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="str">"Tasooj Perennial Cascade (2,400m)"</span>,</span></div>
+          <div class="code-line"><span class="line-num">24</span><span class="line-content">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="str">"Sib &amp; Cherangi Springs"</span>,</span></div>
+          <div class="code-line"><span class="line-num">25</span><span class="line-content">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="str">"Marun River Headwaters"</span>,</span></div>
+          <div class="code-line"><span class="line-num">26</span><span class="line-content">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;],</span></div>
+          <div class="code-line"><span class="line-num">27</span><span class="line-content">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="gold">rare_flora</span>: <span class="kwd">vec</span>![</span></div>
+          <div class="code-line"><span class="line-num">28</span><span class="line-content">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="str">"Chevil (Ferula assa-foetida)"</span>,</span></div>
+          <div class="code-line"><span class="line-num">29</span><span class="line-content">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="str">"Bilehr (Dorema aucheri)"</span>,</span></div>
+          <div class="code-line"><span class="line-num">30</span><span class="line-content">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="str">"Fritillaria imperialis (Inverted Tulip)"</span>,</span></div>
+          <div class="code-line"><span class="line-num">31</span><span class="line-content">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;],</span></div>
+          <div class="code-line"><span class="line-num">32</span><span class="line-content">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</span></div>
+          <div class="code-line"><span class="line-num">33</span><span class="line-content">&nbsp;&nbsp;&nbsp;&nbsp;}</span></div>
+          <div class="code-line"><span class="line-num">34</span><span class="line-content">}</span></div>
         </div>
 
-        <div class="form-group-field">
-          <label class="form-label-hud">موضوع</label>
-          <input type="text" id="form-subject" class="input-hud" required placeholder="موضوع پیام">
+        <!-- Persian Summary Card -->
+        <div class="persian-summary-card">
+          <strong>ساورز؛ ستیغ آرامش و سنگ در قلب زاگرس جنوبی</strong><br>
+          کوهستانی به ارتفاع ۳۲۰۰ متر و امتداد خط‌الرأس ۳۰ کیلومتر در سرحدات چرام و بویراحمد. دومین کانون بزرگ آبخیز استان کهگیلویه و بویراحمد پس از دنا، سرچشمه باغات و آبشار طسوج، فلات مرتفع دشت راق و رویشگاه گیاهان نایاب چویل و لاله‌های واژگون.
         </div>
 
-        <div class="form-group-field">
-          <label class="form-label-hud">متن پیام</label>
-          <textarea id="form-message" class="input-hud" rows="3" required placeholder="پیام خود را بنویسید..."></textarea>
+        <!-- Interactive CLI & Command Prompt -->
+        <div class="interactive-cli">
+          <div id="cli-history" class="cmd-history-output"></div>
+
+          <div class="prompt-row">
+            <span class="prompt-user">sam@saverz-node</span>:<span class="prompt-path">~/core</span><span class="prompt-char">$</span>
+            <input type="text" id="cli-input" class="cmd-input" placeholder="Type a command (help, status, owner, clear)..." autofocus autocomplete="off">
+          </div>
+
+          <div class="quick-actions">
+            <span style="font-size: 0.78rem; color: var(--syn-comment); align-self: center;">QUICK COMMANDS:</span>
+            <button class="action-btn" onclick="execCommand('help')">help</button>
+            <button class="action-btn" onclick="execCommand('owner')">owner</button>
+            <button class="action-btn" onclick="execCommand('status')">status</button>
+            <button class="action-btn" onclick="execCommand('geology')">geology</button>
+            <button class="action-btn" onclick="execCommand('audio')">audio</button>
+            <button class="action-btn" onclick="execCommand('clear')">clear</button>
+          </div>
         </div>
 
-        <button type="submit" class="btn-hud-submit">
-          ارسال پیام اختصاصی
-        </button>
-      </form>
+      </div>
     </div>
   </div>
 
-  <script src="/js/app.js"></script>
-  <script src="/static/js/app.js"></script>
+  <script>
+    // Web Audio Synthesizer for Mountain Breeze
+    let audioCtx = null, isPlaying = false, noiseNode = null, gainNode = null;
+
+    function toggleAudio() {
+      if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      if (audioCtx.state === 'suspended') audioCtx.resume();
+
+      if (!isPlaying) {
+        const bufferSize = audioCtx.sampleRate * 2;
+        const buffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
+        const out = buffer.getChannelData(0);
+        let b0=0,b1=0,b2=0,b3=0,b4=0,b5=0,b6=0;
+        for (let i = 0; i < bufferSize; i++) {
+          const white = Math.random() * 2 - 1;
+          b0 = 0.99886 * b0 + white * 0.0555179;
+          b1 = 0.99332 * b1 + white * 0.0750759;
+          b2 = 0.96900 * b2 + white * 0.1538520;
+          b3 = 0.86650 * b3 + white * 0.3104856;
+          b4 = 0.55000 * b4 + white * 0.5329522;
+          b5 = -0.7616 * b5 - white * 0.0168980;
+          out[i] = (b0 + b1 + b2 + b3 + b4 + b5 + b6 + white * 0.5362) * 0.04;
+          b6 = white * 0.115926;
+        }
+        noiseNode = audioCtx.createBufferSource();
+        noiseNode.buffer = buffer;
+        noiseNode.loop = true;
+        const filter = audioCtx.createBiquadFilter();
+        filter.type = 'lowpass';
+        filter.frequency.setValueAtTime(260, audioCtx.currentTime);
+        gainNode = audioCtx.createGain();
+        gainNode.gain.setValueAtTime(0.001, audioCtx.currentTime);
+        gainNode.gain.exponentialRampToValueAtTime(0.35, audioCtx.currentTime + 1.2);
+        noiseNode.connect(filter);
+        filter.connect(gainNode);
+        gainNode.connect(audioCtx.destination);
+        noiseNode.start();
+        isPlaying = true;
+        return ">> Mountain acoustic pulse: [PLAYING]";
+      } else {
+        if (gainNode) gainNode.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 0.3);
+        setTimeout(() => { if (noiseNode) noiseNode.disconnect(); }, 300);
+        isPlaying = false;
+        return ">> Mountain acoustic pulse: [STOPPED]";
+      }
+    }
+
+    // CLI Engine
+    const cliInput = document.getElementById('cli-input');
+    const cliHistory = document.getElementById('cli-history');
+
+    const commands = {
+      'help': () => `
+<span style="color: var(--syn-gold);">AVAILABLE COMMANDS:</span>
+  <span style="color: var(--syn-func);">owner</span>      - Print system architect and ownership metadata
+  <span style="color: var(--syn-func);">status</span>     - Print live telemetry and node health
+  <span style="color: var(--syn-func);">geology</span>    - Print geomorphology, altitude & karst details
+  <span style="color: var(--syn-func);">audio</span>      - Toggle Web Audio synthesized mountain wind
+  <span style="color: var(--syn-func);">clear</span>      - Clear current terminal buffer
+      `,
+      'owner': () => `<span style="color: var(--syn-func);">Owner:</span> Sam Mousavi &lt;sam@saverz.shop&gt;\n<span style="color: var(--syn-type);">Project:</span> SAVERZ Sovereign Alpine Node\n<span style="color: var(--syn-gold);">Status:</span> Verified &amp; Authorized`,
+      'status': () => `<span style="color: var(--syn-func);">[NODE STATUS]</span> saverz.shop : ACTIVE (HTTP 200)\n<span style="color: var(--syn-type);">Kernel:</span> Linux 6.8.0-x86_64-server\n<span style="color: var(--syn-number);">Elevation:</span> 3,200 Meters | Ridge: 32.4 KM\n<span style="color: var(--syn-string);">Memory Overhead:</span> 7.2 MB (0.0% CPU)`,
+      'geology': () => `<span style="color: var(--syn-gold);">[GEOLOGY]</span> Asmari Limestone &amp; Dolomite Karst Formation\n<span style="color: var(--syn-type);">Biome:</span> Southern Zagros Alpine Springs\n<span style="color: var(--syn-string);">Key Zones:</span> Tasooj Valley (2,400m) • Dasht-e Raq (2,800m) • Saverz Crest (3,200m)`,
+      'audio': () => toggleAudio(),
+      'clear': () => { cliHistory.innerHTML = ''; return ''; }
+    };
+
+    function execCommand(cmdText) {
+      cmdText = (cmdText || '').trim().toLowerCase();
+      if (!cmdText) return;
+
+      const log = document.createElement('div');
+      log.style.marginBottom = '10px';
+      log.innerHTML = `<span style="color: var(--syn-func);">sam@saverz-node</span>:<span style="color: var(--syn-type);">~/core</span><span style="color: var(--syn-gold);">$</span> ${cmdText}`;
+      cliHistory.appendChild(log);
+
+      if (commands[cmdText]) {
+        const res = commands[cmdText]();
+        if (res) {
+          const out = document.createElement('div');
+          out.style.marginBottom = '14px';
+          out.style.whiteSpace = 'pre-wrap';
+          out.innerHTML = res;
+          cliHistory.appendChild(out);
+        }
+      } else {
+        const err = document.createElement('div');
+        err.style.color = '#FF5F56';
+        err.style.marginBottom = '14px';
+        err.textContent = `zsh: command not found: ${cmdText}. Type 'help' for commands.`;
+        cliHistory.appendChild(err);
+      }
+
+      if (cliInput) cliInput.value = '';
+      window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    if (cliInput) {
+      cliInput.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+          execCommand(cliInput.value);
+        }
+      });
+    }
+  </script>
 </body>
 </html>

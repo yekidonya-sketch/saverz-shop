@@ -3,6 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
   <title>SAVERZ | ساورز؛ ستیغ ۳۲۰۰ متری زاگرس جنوبی</title>
   <meta name="description" content="تجربه سه‌بعدی و تعاملی کوهستان ساورز با الگوریتم‌های پرلین نویز و شبیه‌سازی ژئومورفولوژی زاگرس.">
   
@@ -10,15 +13,23 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@200;300;400;600;700;800;900&family=Cinzel:wght@500;700;800;900&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
   
-  <!-- Three.js CDN -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <!-- Local Three.js + CDN Fallback -->
+  <script src="/js/three.min.js"></script>
+  <script src="/static/js/three.min.js"></script>
+  <script>
+    if (typeof THREE === 'undefined') {
+      document.write('<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"><\/script>');
+    }
+  </script>
 
   <link rel="stylesheet" href="/css/style.css">
   <link rel="stylesheet" href="/static/css/style.css">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏔️</text></svg>">
 
   <style>
-    /* AWWWARDS THREE.JS TERRAIN CORE EMBEDDED */
+    /* ==========================================================================
+       AWWWARDS THREE.JS 3D TERRAIN CORE EMBEDDED STYLING
+       ========================================================================== */
     :root {
       --bg-primary: #0D0F0E;
       --bg-secondary: #141715;
@@ -33,39 +44,72 @@
       --font-mono: 'Space Grotesk', monospace;
       --transition-smooth: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     }
+
     * { margin: 0; padding: 0; box-sizing: border-box; font-family: var(--font-persian); }
     html { scroll-behavior: smooth; background-color: var(--bg-primary); color: var(--text-main); }
     body { direction: rtl; text-align: right; overflow-x: hidden; background: var(--bg-primary); min-height: 100vh; }
-    #webgl-canvas-container { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 1; pointer-events: all; background: radial-gradient(circle at 50% 30%, #151A17 0%, #0D0F0E 80%); }
-    #three-canvas { width: 100%; height: 100%; display: block; }
+
+    #webgl-canvas-container {
+      position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+      z-index: 1; pointer-events: all;
+      background: radial-gradient(circle at 50% 30%, #151A17 0%, #0D0F0E 80%);
+    }
+
     .experience-overlay { position: relative; z-index: 10; pointer-events: none; }
     .interactive-element { pointer-events: all; }
     .container { max-width: 1360px; margin: 0 auto; padding: 0 40px; }
     .font-mono { font-family: var(--font-mono); direction: ltr; display: inline-block; }
     .font-serif { font-family: var(--font-serif); }
-    .hud-navbar { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 32px 40px; display: flex; justify-content: space-between; align-items: center; }
+
+    /* HUD Navbar */
+    .hud-navbar {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      padding: 32px 40px; display: flex; justify-content: space-between; align-items: center;
+    }
     .hud-brand { display: flex; align-items: baseline; gap: 16px; }
     .hud-title { font-family: var(--font-serif); font-size: 1.8rem; font-weight: 800; letter-spacing: 6px; color: var(--text-main); }
     .hud-badge { font-family: var(--font-mono); font-size: 0.75rem; color: var(--accent-gold); border: 1px solid var(--border-gold); padding: 3px 10px; letter-spacing: 1px; }
+
     .hud-controls-right { display: flex; align-items: center; gap: 16px; }
-    .hud-btn { background: rgba(20, 23, 21, 0.75); backdrop-filter: blur(12px); border: 1px solid var(--border-fine); color: var(--text-main); padding: 10px 20px; font-size: 0.82rem; font-weight: 600; border-radius: 2px; display: flex; align-items: center; gap: 10px; cursor: pointer; transition: var(--transition-smooth); }
+    .hud-btn {
+      background: rgba(20, 23, 21, 0.75); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+      border: 1px solid var(--border-fine); color: var(--text-main);
+      padding: 10px 20px; font-size: 0.82rem; font-weight: 600; border-radius: 2px;
+      display: flex; align-items: center; gap: 10px; cursor: pointer; transition: var(--transition-smooth);
+    }
     .hud-btn:hover { border-color: var(--accent-gold); color: var(--accent-gold); transform: translateY(-1px); }
     .hud-pulse-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent-gold); box-shadow: 0 0 10px var(--accent-gold); animation: pulseDot 1.6s infinite; }
     .hud-pulse-dot.paused { animation: none; background: var(--text-light); box-shadow: none; }
     @keyframes pulseDot { 0% { transform: scale(0.9); opacity: 0.5; } 50% { transform: scale(1.4); opacity: 1; } 100% { transform: scale(0.9); opacity: 0.5; } }
+
+    /* Hero */
     .hero-fullscreen { min-height: 100vh; display: flex; flex-direction: column; justify-content: flex-end; padding-bottom: 80px; }
     .hero-coordinates-tag { font-family: var(--font-mono); font-size: 0.85rem; color: var(--accent-gold); letter-spacing: 2px; margin-bottom: 20px; display: block; }
     .hero-mega-headline { font-size: 6.5rem; font-weight: 900; line-height: 1.05; letter-spacing: -2.5px; color: var(--text-main); margin-bottom: 24px; text-shadow: 0 4px 40px rgba(0,0,0,0.8); }
     .hero-mega-headline span.gold { color: var(--accent-gold); font-weight: 800; }
     .hero-sub-statement { font-size: 1.35rem; font-weight: 300; color: var(--text-muted); max-width: 640px; line-height: 1.85; margin-bottom: 40px; text-shadow: 0 2px 20px rgba(0,0,0,0.6); }
+
     .telemetry-strip { display: flex; align-items: center; gap: 40px; padding-top: 24px; border-top: 1px solid var(--border-fine); font-family: var(--font-mono); font-size: 0.85rem; }
     .telemetry-item { display: flex; align-items: baseline; gap: 10px; }
     .telemetry-val { font-size: 1.25rem; font-weight: 700; color: var(--text-main); }
     .telemetry-lbl { color: var(--text-light); font-size: 0.75rem; letter-spacing: 1px; }
-    .terrain-control-widget { position: fixed; bottom: 40px; left: 40px; z-index: 100; background: rgba(20, 23, 21, 0.85); backdrop-filter: blur(16px); border: 1px solid var(--border-fine); padding: 16px 20px; border-radius: 4px; display: flex; align-items: center; gap: 20px; font-family: var(--font-mono); font-size: 0.8rem; color: var(--text-muted); }
+
+    /* 3D Hint Widget */
+    .terrain-control-widget {
+      position: fixed; bottom: 40px; left: 40px; z-index: 100;
+      background: rgba(20, 23, 21, 0.85); backdrop-filter: blur(16px);
+      border: 1px solid var(--border-fine); padding: 16px 20px; border-radius: 4px;
+      display: flex; align-items: center; gap: 20px; font-family: var(--font-mono); font-size: 0.8rem; color: var(--text-muted);
+    }
     .widget-hint { color: var(--accent-gold); display: flex; align-items: center; gap: 8px; }
+
+    /* Chapters */
     .chapter-section { min-height: 100vh; display: flex; align-items: center; padding: 100px 0; }
-    .chapter-card-minimal { background: rgba(18, 21, 19, 0.84); backdrop-filter: blur(20px); border: 1px solid var(--border-fine); padding: 60px; max-width: 680px; border-radius: 2px; box-shadow: 0 20px 60px rgba(0,0,0,0.5); position: relative; }
+    .chapter-card-minimal {
+      background: rgba(18, 21, 19, 0.84); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--border-fine); padding: 60px; max-width: 680px; border-radius: 2px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.5); position: relative;
+    }
     .chapter-card-minimal::before { content: ''; position: absolute; top: 0; right: 0; width: 40px; height: 2px; background: var(--accent-gold); }
     .chapter-number { font-family: var(--font-mono); font-size: 0.82rem; color: var(--accent-gold); letter-spacing: 3px; margin-bottom: 16px; display: block; }
     .chapter-title { font-size: 2.8rem; font-weight: 800; color: var(--text-main); line-height: 1.2; margin-bottom: 20px; letter-spacing: -0.5px; }
@@ -73,7 +117,13 @@
     .chapter-stat-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; padding-top: 24px; border-top: 1px solid var(--border-fine); }
     .chapter-stat-val { font-family: var(--font-mono); font-size: 1.5rem; font-weight: 700; color: var(--text-main); margin-bottom: 4px; }
     .chapter-stat-lbl { font-size: 0.8rem; color: var(--text-light); }
-    .modal-backdrop { position: fixed; inset: 0; background: rgba(10, 12, 11, 0.95); backdrop-filter: blur(20px); z-index: 2000; display: flex; align-items: center; justify-content: center; padding: 30px; opacity: 0; visibility: hidden; transition: var(--transition-smooth); }
+
+    /* Modal */
+    .modal-backdrop {
+      position: fixed; inset: 0; background: rgba(10, 12, 11, 0.95); backdrop-filter: blur(20px);
+      z-index: 2000; display: flex; align-items: center; justify-content: center; padding: 30px;
+      opacity: 0; visibility: hidden; transition: var(--transition-smooth);
+    }
     .modal-backdrop.open { opacity: 1; visibility: visible; }
     .modal-box { background: #141715; border: 1px solid var(--border-fine); padding: 48px; max-width: 540px; width: 100%; border-radius: 2px; box-shadow: 0 30px 90px rgba(0,0,0,0.8); }
     .form-group-field { display: flex; flex-direction: column; gap: 8px; margin-bottom: 18px; }
@@ -82,6 +132,7 @@
     .input-hud:focus { border-color: var(--accent-gold); }
     .btn-hud-submit { width: 100%; background: var(--accent-gold); color: #0D0F0E; padding: 16px; font-size: 1rem; font-weight: 700; border-radius: 2px; cursor: pointer; margin-top: 10px; transition: var(--transition-smooth); border: none; }
     .btn-hud-submit:hover { background: #DFCA9E; }
+
     @media (max-width: 1024px) { .hero-mega-headline { font-size: 4.2rem; } .chapter-card-minimal { padding: 40px; } .telemetry-strip { flex-wrap: wrap; gap: 20px; } }
     @media (max-width: 768px) { .hero-mega-headline { font-size: 2.8rem; } .hud-navbar { padding: 20px; } .container { padding: 0 20px; } .chapter-card-minimal { padding: 28px; } .terrain-control-widget { display: none; } }
   </style>

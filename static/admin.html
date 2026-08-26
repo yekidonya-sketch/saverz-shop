@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>پنل مدیریت | SAVERZ SHOP</title>
+  <link rel="stylesheet" href="/static/css/style.css">
+  <style>
+    .admin-container { max-width: 1100px; margin: 40px auto; padding: 0 20px; }
+    .stat-card-box { background: white; padding: 24px; border-radius: var(--radius-md); border: 1px solid var(--border-subtle); box-shadow: var(--shadow-sm); }
+    .table-custom { width: 100%; border-collapse: collapse; margin-top: 16px; font-size: 0.9rem; }
+    .table-custom th, .table-custom td { padding: 12px 14px; text-align: right; border-bottom: 1px solid var(--border-subtle); }
+    .table-custom th { background: var(--bg-card-alt); color: var(--color-primary); font-weight: 700; }
+  </style>
+</head>
+<body style="background: #F4EFE6;">
+
+  <div class="admin-container">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px;">
+      <div>
+        <h1 style="color: var(--color-primary); font-size: 1.8rem; font-weight: 800;">⚙️ پنل مدیریت فروشگاه ساورز</h1>
+        <p style="color: var(--text-muted); font-size: 0.9rem;">سیستم پایش سفارش‌ها، رزرو تورها و گزارش‌های درآمدی</p>
+      </div>
+      <a href="/" class="btn-outline">بازگشت به فروشگاه</a>
+    </div>
+
+    <!-- Login Box -->
+    <div id="admin-login-box" style="background: white; max-width: 420px; margin: 60px auto; padding: 36px; border-radius: var(--radius-lg); border: 1px solid var(--border-subtle); box-shadow: var(--shadow-lg);">
+      <h3 style="color: var(--color-primary); font-weight: 800; margin-bottom: 8px;">ورود مدیریت</h3>
+      <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 20px;">رمز عبور مدیریت ساورز را وارد کنید</p>
+      <form onsubmit="handleAdminLogin(event)">
+        <div class="form-group">
+          <label class="form-label">رمز عبور</label>
+          <input type="password" id="admin-password" class="form-control" placeholder="••••••••" required>
+        </div>
+        <button type="submit" class="btn-primary" style="width: 100%; justify-content: center;">ورود به داشبورد</button>
+      </form>
+    </div>
+
+    <!-- Dashboard Content (hidden initially) -->
+    <div id="admin-dashboard-content" style="display: none;">
+      <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; margin-bottom: 32px;">
+        <div class="stat-card-box">
+          <span style="font-size: 0.82rem; color: var(--text-light); display: block;">کل سفارشات</span>
+          <span id="stat-total-orders" style="font-size: 1.8rem; font-weight: 900; color: var(--color-primary);">۰</span>
+        </div>
+        <div class="stat-card-box">
+          <span style="font-size: 0.82rem; color: var(--text-light); display: block;">مجموع فروش</span>
+          <span id="stat-revenue" style="font-size: 1.8rem; font-weight: 900; color: var(--color-amber);">۰</span>
+        </div>
+        <div class="stat-card-box">
+          <span style="font-size: 0.82rem; color: var(--text-light); display: block;">در انتظار ارسال</span>
+          <span id="stat-pending" style="font-size: 1.8rem; font-weight: 900; color: var(--color-terracotta);">۰</span>
+        </div>
+        <div class="stat-card-box">
+          <span style="font-size: 0.82rem; color: var(--text-light); display: block;">رزروهای تور</span>
+          <span id="stat-tours" style="font-size: 1.8rem; font-weight: 900; color: var(--color-primary);">۰</span>
+        </div>
+      </div>
+
+      <!-- Orders Section -->
+      <div class="stat-card-box" style="margin-bottom: 30px;">
+        <h3 style="color: var(--color-primary); font-size: 1.2rem; font-weight: 800;">📦 آخرین سفارش‌های ثبت شده</h3>
+        <div style="overflow-x: auto;">
+          <table class="table-custom">
+            <thead>
+              <tr>
+                <th>کد رهگیری</th>
+                <th>نام خریدار</th>
+                <th>تلفن</th>
+                <th>شهر / استان</th>
+                <th>مبلغ کل</th>
+                <th>وضعیت</th>
+                <th>تاریخ</th>
+              </tr>
+            </thead>
+            <tbody id="orders-tbody">
+              <!-- Loaded via JS -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Tour Bookings Section -->
+      <div class="stat-card-box">
+        <h3 style="color: var(--color-primary); font-size: 1.2rem; font-weight: 800;">🏕️ درخواست‌های رزرو تور</h3>
+        <div style="overflow-x: auto;">
+          <table class="table-custom">
+            <thead>
+              <tr>
+                <th>کد رزرو</th>
+                <th>عنوان تور</th>
+                <th>سرپرست</th>
+                <th>تلفن</th>
+                <th>تاریخ سفر</th>
+                <th>تعداد</th>
+                <th>وضعیت</th>
+              </tr>
+            </thead>
+            <tbody id="tours-tbody">
+              <!-- Loaded via JS -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    async function handleAdminLogin(e) {
+      e.preventDefault();
+      const pw = document.getElementById('admin-password').value;
+      try {
+        const res = await fetch('/api/admin/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ password: pw })
+        });
+        const data = await res.json();
+        if (data.success) {
+          document.getElementById('admin-login-box').style.display = 'none';
+          document.getElementById('admin-dashboard-content').style.display = 'block';
+          loadAdminDashboard();
+        } else {
+          alert('رمز عبور نادرست است');
+        }
+      } catch (err) {
+        alert('خطا در ورود به سیستم');
+      }
+    }
+
+    async function loadAdminDashboard() {
+      // Load stats
+      try {
+        const res = await fetch('/api/admin/stats');
+        const data = await res.json();
+        if (data.success && data.stats) {
+          const s = data.stats;
+          document.getElementById('stat-total-orders').textContent = s.total_orders;
+          document.getElementById('stat-revenue').textContent = new Intl.NumberFormat('fa-IR').format(s.total_revenue) + ' ت';
+          document.getElementById('stat-pending').textContent = s.pending_orders;
+          document.getElementById('stat-tours').textContent = s.total_tours;
+        }
+
+        // Load orders
+        const ordRes = await fetch('/api/admin/orders');
+        const ordData = await ordRes.json();
+        if (ordData.success && ordData.orders) {
+          const tbody = document.getElementById('orders-tbody');
+          if (ordData.orders.length === 0) {
+            tbody.innerHTML = '<tr><td colspan="7" style="text-align: center; color: var(--text-muted);">هنوز سفارشی ثبت نشده است.</td></tr>';
+          } else {
+            tbody.innerHTML = ordData.orders.map(o => `
+              <tr>
+                <td><b>${o.tracking_code}</b></td>
+                <td>${o.customer_name}</td>
+                <td>${o.phone}</td>
+                <td>${o.province} - ${o.city}</td>
+                <td>${new Intl.NumberFormat('fa-IR').format(o.total_amount)} تومان</td>
+                <td><span style="color: var(--color-amber); font-weight: 700;">${o.status}</span></td>
+                <td>${o.created_at}</td>
+              </tr>
+            `).join('');
+          }
+        }
+
+        // Load tours
+        const tourRes = await fetch('/api/admin/tours');
+        const tourData = await tourRes.json();
+        if (tourData.success && tourData.tours) {
+          const tbody = document.getElementById('tours-tbody');
+          if (tourData.tours.length === 0) {
+            tbody.innerHTML = '<tr><td colspan="7" style="text-align: center; color: var(--text-muted);">هنوز رزروی ثبت نشده است.</td></tr>';
+          } else {
+            tbody.innerHTML = tourData.tours.map(t => `
+              <tr>
+                <td><b>${t.booking_code}</b></td>
+                <td>${t.tour_name}</td>
+                <td>${t.customer_name}</td>
+                <td>${t.phone}</td>
+                <td>${t.requested_date}</td>
+                <td>${t.guests_count} نفر</td>
+                <td><span style="color: var(--color-primary); font-weight: 700;">${t.status}</span></td>
+              </tr>
+            `).join('');
+          }
+        }
+      } catch (err) {
+        console.error('Error loading admin dashboard:', err);
+      }
+    }
+  </script>
+</body>
+</html>

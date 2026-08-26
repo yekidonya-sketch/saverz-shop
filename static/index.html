@@ -3,585 +3,454 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SAVERZ | فروشگاه و میراث کهن کوهستان ساورز</title>
-  <meta name="description" content="فروشگاه اختصاصی عسل وحشی، گیاهان دارویی نایاب (چویل، بیلهر)، فرآورده‌های سنتی و تجربه‌های بوم‌گردی کوه ساورز زاگرس.">
+  <title>SAVERZ | ساورز؛ مونوگراف و آرشیو بوم‌شناختی کوهستان</title>
+  <meta name="description" content="مونوگراف مستند، پژوهش ژئومورفولوژی، هرباریوم گیاهان نادر و روایت بوم‌شناختی ستیغ ۳۲۰۰ متری کوه ساورز در زاگرس جنوبی.">
   <link rel="stylesheet" href="/static/css/style.css">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏔️</text></svg>">
 </head>
 <body>
 
-  <!-- Announcement Bar -->
-  <div class="top-bar">
-    <span>🏔️ برداشت مستقیم از ارتفاعات ۳۲۰۰ متری ساورز • ضمانت ۱۰۰٪ اصالت و بازگشت وجه • ارسال رایگان سفارش‌های بالای ۱ میلیون تومان</span>
-  </div>
+  <!-- Site Navigation -->
+  <nav class="site-nav">
+    <div class="container nav-container">
+      <div class="brand-wrapper">
+        <a href="/" class="brand-monogram">SAVERZ</a>
+        <span class="brand-badge font-mono">30°48′N 50°49′E • 3,200M</span>
+      </div>
 
-  <!-- Header -->
-  <header class="site-header">
-    <div class="container header-inner">
-      <a href="/" class="brand-logo">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-          <path d="M3 20L10 6L15 14L18 10L22 20H3Z"></path>
-          <path d="M10 6L12 10L14 8L15 14"></path>
-        </svg>
-        <div class="brand-titles">
-          <span class="brand-name">SAVERZ</span>
-          <span class="brand-sub">میراث اصیل کوهستان ساورز</span>
+      <ul class="nav-menu">
+        <li><a href="#elevation-matrix">طبقات ارتفاعی</a></li>
+        <li><a href="#herbarium">هرباریوم و فلور</a></li>
+        <li><a href="#gallery">گالری مستند</a></li>
+        <li><a href="#monograph">جستارهای اقلیمی</a></li>
+        <li><a href="#concierge">درخواست پژوهش</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <button id="audio-toggle-btn" class="audio-toggle" title="پخش صدای آرامش‌بخش باد و چشمه‌های ساورز">
+          <div id="audio-wave-bars" class="audio-wave paused">
+            <div class="audio-bar"></div>
+            <div class="audio-bar"></div>
+            <div class="audio-bar"></div>
+            <div class="audio-bar"></div>
+          </div>
+          <span id="audio-status-text">طنین کوهستان</span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <header class="hero-editorial">
+    <div class="container">
+      <div class="hero-meta-top font-mono">
+        <span>ZAGROS SOUTHERN CREST • MONOGRAPH NO. 01</span>
+        <span>CHORAM & BOYER-AHMAD BORDERLANDS</span>
+      </div>
+
+      <h1 class="hero-headline">
+        ساورز؛ خاستگاه صخره‌ها و <span class="gold">سکوت دیرین زاگرس</span>
+      </h1>
+
+      <p class="hero-lead-text">
+        کاوشی معمارانه در ژئومورفولوژی، هرباریوم گیاهان نایاب آلپاین و زیست‌بوم دست‌نخورده ستیغ ۳۲۰۰ متری ساورز؛ دومین کانون آبخیز و هیدرولوژیک کهگیلویه و بویراحمد پس از دنا.
+      </p>
+
+      <div class="hero-actions-row">
+        <a href="#elevation-matrix" class="btn-editorial-primary">
+          <span>کاوش لایه‌های بوم‌شناختی</span>
+          <span style="font-size: 1.2rem;">↓</span>
+        </a>
+        <a href="#herbarium" class="btn-editorial-secondary">
+          <span>مشاهده هرباریوم فلور</span>
+        </a>
+      </div>
+
+      <div class="telemetry-grid">
+        <div class="telemetry-col">
+          <span class="telemetry-num">۳,۲۰۰ M</span>
+          <span class="telemetry-label">حداکثر ارتفاع ستیغ از سطح دریا</span>
         </div>
-      </a>
-
-      <nav>
-        <ul class="nav-links">
-          <li><a href="#products" class="active">محصولات ناب</a></li>
-          <li><a href="#heritage">شگفتی‌های ساورز</a></li>
-          <li><a href="#tours">تور و بوم‌گردی</a></li>
-          <li><a href="#stories">داستان‌های زاگرس</a></li>
-          <li><a href="#reviews">نظرات خریداران</a></li>
-          <li><a href="#contact">تماس با ما</a></li>
-        </ul>
-      </nav>
-
-      <div class="header-actions">
-        <button id="btn-track-order" class="btn-track">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <circle cx="11" cy="11" r="8"></circle>
-            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-          </svg>
-          <span>رهگیری سفارش</span>
-        </button>
-
-        <button id="cart-btn" class="btn-icon" title="سبد خرید">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
-            <line x1="3" y1="6" x2="21" y2="6"></line>
-            <path d="M16 10a4 4 0 0 1-8 0"></path>
-          </svg>
-          <span id="cart-badge" class="badge-count" style="display: none;">0</span>
-        </button>
+        <div class="telemetry-col">
+          <span class="telemetry-num">۳۰+ KM</span>
+          <span class="telemetry-label">امتداد خط‌الرأس کارستی شمال به جنوب</span>
+        </div>
+        <div class="telemetry-col">
+          <span class="telemetry-num">۳۵۰,۰۰۰ HA</span>
+          <span class="telemetry-label">گستره حوضه آبخیز و دامنه‌های ییلاقی</span>
+        </div>
+        <div class="telemetry-col">
+          <span class="telemetry-num">۲,۵۰۰ M</span>
+          <span class="telemetry-label">ارتفاع فلات بکر دشت راق</span>
+        </div>
       </div>
     </div>
   </header>
 
-  <!-- Hero Section -->
-  <section class="hero-section">
-    <div class="container hero-grid">
-      <div class="hero-content">
-        <div class="hero-badge">
-          <span>🌿</span>
-          <span>برداشت ارگانیک و سنتی ییلاقات زاگرس</span>
+  <!-- Elevation Matrix Section -->
+  <section id="elevation-matrix" class="editorial-section">
+    <div class="container">
+      <span class="section-tagline">ALTITUDE & MICROCLIMATES</span>
+      <h2 class="section-heading-xl">پیمایش طبقات ارتفاعی و لایه‌های زیستی ساورز</h2>
+      <p class="section-subtext">
+        با افزایش ارتفاع در دامنه ساورز، دما، تنوع پوشش گیاهی و عوارض ژئومورفولوژیک به شکلی چشمگیر دگرگون می‌شوند. هر طبقه ارتفاعی ساختار اکولوژیک منحصر به فرد خود را دارد.
+      </p>
+
+      <div class="matrix-wrapper">
+        <div class="matrix-nav">
+          <button class="matrix-nav-btn active">
+            <span class="matrix-nav-alt">ZONE 01 • 3,200M</span>
+            <span class="matrix-nav-title">ستیغ صخره‌ای و خط‌الرأس</span>
+          </button>
+          <button class="matrix-nav-btn">
+            <span class="matrix-nav-alt">ZONE 02 • 2,800M</span>
+            <span class="matrix-nav-title">فلات مرتفع دشت راق</span>
+          </button>
+          <button class="matrix-nav-btn">
+            <span class="matrix-nav-alt">ZONE 03 • 2,400M</span>
+            <span class="matrix-nav-title">دره چشمه‌ها و آبشار طسوج</span>
+          </button>
+          <button class="matrix-nav-btn">
+            <span class="matrix-nav-alt">ZONE 04 • 1,800M</span>
+            <span class="matrix-nav-title">پایکوه و جنگل‌های کهنسال</span>
+          </button>
         </div>
-        <h1 class="hero-title">
-          عطر اصیل صخره‌های زاگرس و <span>شهد ناب ساورز</span> در خانه شما
-        </h1>
-        <p class="hero-desc">
-          کوه ساورز با ارتفاع ۳۲۰۰ متر و دامنه‌های بکر طسوج و دشت راق، خاستگاه کهن‌ترین گیاهان دارویی کمیاب (چویل، بیلهر) و خالص‌ترین عسل‌های وحشی صخره‌ای ایران است.
+
+        <div class="matrix-content-pane">
+          <div class="matrix-pane-header">
+            <span id="matrix-latin" class="font-serif" style="color: var(--accent-gold); font-size: 0.88rem; display: block; margin-bottom: 6px;">Pinnacle & Alpine Crest</span>
+            <h3 id="matrix-title">ستیغ صخره‌ای و خط‌الرأس ۳۲۰۰ متری ساورز</h3>
+            <p id="matrix-desc">
+              دیواره‌های استوار آهکی با امتدادی بیش از ۳۰ کیلومتر که مرز کهن چرام و بویراحمد را تشکیل می‌دهند. این منطقه در زمستان زیر خروارها برف مدفون است و در بهار به رویشگاه اصلی نادرترین گیاهان آلپاین مانند چویل، بیلهر و لاله‌های واژگون تبدیل می‌شود.
+            </p>
+          </div>
+
+          <div class="matrix-specs-grid">
+            <div class="matrix-spec-item">
+              <span class="matrix-spec-title">اقلیم و وضعیت جوی</span>
+              <span id="matrix-climate" class="matrix-spec-val">آلپاین بسیار سرد (یخچال‌های طبیعی)</span>
+            </div>
+            <div class="matrix-spec-item">
+              <span class="matrix-spec-title">گونه‌های شاخص گیاهی</span>
+              <span id="matrix-flora" class="matrix-spec-val">چویل صخره‌ای، بیلهر، لاله واژگون</span>
+            </div>
+            <div class="matrix-spec-item">
+              <span class="matrix-spec-title">فون و پستانداران</span>
+              <span id="matrix-fauna" class="matrix-spec-val">پلنگ زاگرس، کل و بز (پازن)، کبک دری</span>
+            </div>
+            <div class="matrix-spec-item">
+              <span class="matrix-spec-title">مختصات جغرافیایی</span>
+              <span id="matrix-coords" class="matrix-spec-val font-mono">30°48′22″N 50°49′15″E</span>
+            </div>
+            <div class="matrix-spec-item">
+              <span class="matrix-spec-title">منابع هیدرولوژیکی</span>
+              <span id="matrix-water" class="matrix-spec-val">برف‌چال‌های دائمی و غارهای برفی</span>
+            </div>
+            <div class="matrix-spec-item">
+              <span class="matrix-spec-title">نوع بافت زمین‌شناسی</span>
+              <span class="matrix-spec-val">آهک آسماری و دولومیت کارستی</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Botanical Herbarium Section -->
+  <section id="herbarium" class="editorial-section" style="background: var(--bg-surface);">
+    <div class="container">
+      <span class="section-tagline">SAVERZ BOTANICAL HERBARIUM</span>
+      <h2 class="section-heading-xl">هرباریوم گونه‌های نادر فلور ساورز</h2>
+      <p class="section-subtext">
+        مجموعه‌ای مدون از مهم‌ترین گونه‌های گیاهی دارویی، معطر و در معرض حفاظت که منحصراً در صخره‌ها، شکاف سنگ‌ها و چمن‌زارهای مرتفع ساورز می‌رویند.
+      </p>
+
+      <div class="herbarium-grid">
+        <!-- Plate 1: Chevil -->
+        <article class="herbarium-plate">
+          <div>
+            <div class="plate-header">
+              <span class="plate-code">HERB-SVRZ-01</span>
+              <span class="plate-latin">Ferula assa-foetida / Chavir</span>
+            </div>
+            <h3 class="plate-name">چویل اصل ساورز</h3>
+            <p class="plate-desc">
+              گیاهی به غایت معطر و مقدس در فرهنگ کهن کهگیلویه. عشایر زاگرس از دیرباز عصاره چویل را به عنوان نگهدارنده طبیعی فرآورده‌های روغنی و لبنی در ییلاق به کار می‌برده‌اند.
+            </p>
+          </div>
+          <ul class="plate-meta-list">
+            <li><span>زیستگاه ارتفاعی:</span> <span class="val">۲,۹۰۰ تا ۳,۲۰۰ متر</span></li>
+            <li><span>فصل رویش:</span> <span class="val">اردیبهشت و خرداد</span></li>
+            <li><span>ترکیبات شاخص:</span> <span class="val">ترپنوئیدها و پینن‌های معطر</span></li>
+          </ul>
+        </article>
+
+        <!-- Plate 2: Bilehr -->
+        <article class="herbarium-plate">
+          <div>
+            <div class="plate-header">
+              <span class="plate-code">HERB-SVRZ-02</span>
+              <span class="plate-latin">Dorema aucheri</span>
+            </div>
+            <h3 class="plate-name">بیلهر (کندل کوهی)</h3>
+            <p class="plate-desc">
+              گیاه دارویی نادر و ارزشمند صخره‌های شیب‌دار ساورز. با صمغ زردرنگ و بوی تند و ویژه که در طب بومی برای پاکسازی کبد و کاهش چربی خون کاربرد فراوان داشته است.
+            </p>
+          </div>
+          <ul class="plate-meta-list">
+            <li><span>زیستگاه ارتفاعی:</span> <span class="val">۲,۷۰۰ تا ۳,۱۰۰ متر</span></li>
+            <li><span>وضعیت حفاظتی:</span> <span class="val">گونه حساس در معرض انقراض</span></li>
+            <li><span>خواص دارویی:</span> <span class="val">آنتی‌اکسیدان قوی، محافظت کبدی</span></li>
+          </ul>
+        </article>
+
+        <!-- Plate 3: Inverted Tulip -->
+        <article class="herbarium-plate">
+          <div>
+            <div class="plate-header">
+              <span class="plate-code">HERB-SVRZ-03</span>
+              <span class="plate-latin">Fritillaria imperialis</span>
+            </div>
+            <h3 class="plate-name">لاله واژگون (اشک مریم)</h3>
+            <p class="plate-desc">
+              نگین سرخ‌فام کوهستان ساورز. با آغاز ذوب برف‌ها در اوایل بهار، دشت‌های دامنه‌ای ساورز میزبان رویش یکی از متراکم‌ترین و زیباترین کانون‌های لاله واژگون زاگرس می‌شوند.
+            </p>
+          </div>
+          <ul class="plate-meta-list">
+            <li><span>زیستگاه ارتفاعی:</span> <span class="val">۲,۲۰۰ تا ۲,۷۰۰ متر</span></li>
+            <li><span>دوره گل‌دهی:</span> <span class="val">فروردین تا اواسط اردیبهشت</span></li>
+            <li><span>نمادشناسی:</span> <span class="val">نماد پاکی، حزن و استواری زاگرس</span></li>
+          </ul>
+        </article>
+
+        <!-- Plate 4: Lizak -->
+        <article class="herbarium-plate">
+          <div>
+            <div class="plate-header">
+              <span class="plate-code">HERB-SVRZ-04</span>
+              <span class="plate-latin">Allium atroviolaceum</span>
+            </div>
+            <h3 class="plate-name">لیزک (بن‌سرخ)</h3>
+            <p class="plate-desc">
+              سبزی کوهی خودرو با خواص ضدعفونی‌کننده و تقویت‌کننده دستگاه گوارش که در چمن‌زارهای مرطوب پای صخره‌های ساورز رشد می‌کند و در آش و پلوهای لری کاربرد دارد.
+            </p>
+          </div>
+          <ul class="plate-meta-list">
+            <li><span>زیستگاه ارتفاعی:</span> <span class="val">۲,۴۰۰ تا ۲,۸۰۰ متر</span></li>
+            <li><span>محل رویش:</span> <span class="val">چمن‌زارهای برف‌گیر دشت راق</span></li>
+            <li><span>کاربرد سنتی:</span> <span class="val">تغذیه بهاره و تقویت بنیه</span></li>
+          </ul>
+        </article>
+
+        <!-- Plate 5: Wild Mountain Shallot -->
+        <article class="herbarium-plate">
+          <div>
+            <div class="plate-header">
+              <span class="plate-code">HERB-SVRZ-05</span>
+              <span class="plate-latin">Allium hirtifolium</span>
+            </div>
+            <h3 class="plate-name">موسیر کوهی وحشی</h3>
+            <p class="plate-desc">
+              پیازهای درشت و خودروی روییده در خاک بکر و سنگلاخ‌های ساورز. با طعمی تندتر و خلوص آنتی‌باکتریال بسیار فراتر از نمونه‌های پرورشی دشت‌های صنعتی.
+            </p>
+          </div>
+          <ul class="plate-meta-list">
+            <li><span>زیستگاه ارتفاعی:</span> <span class="val">۲,۵۰۰ تا ۲,۹۰۰ متر</span></li>
+            <li><span>بافت خاک:</span> <span class="val">سنگلاخی آهکی با زه‌کشی عالی</span></li>
+            <li><span>ترکیبات فعال:</span> <span class="val">ترکیبات آلیسیل و سولفوریک</span></li>
+          </ul>
+        </article>
+
+        <!-- Plate 6: Persian Oak -->
+        <article class="herbarium-plate">
+          <div>
+            <div class="plate-header">
+              <span class="plate-code">HERB-SVRZ-06</span>
+              <span class="plate-latin">Quercus brantii</span>
+            </div>
+            <h3 class="plate-name">بلوط کهنسال ایرانی</h3>
+            <p class="plate-desc">
+              درختان کهنسال دارمازو و برودار در شیب‌های پایینی ساورز و دره طسوج. ضامن بقای خاک کارستی، تثبیت آب‌های روان و خانه سنجاب‌های بومی زاگرس.
+            </p>
+          </div>
+          <ul class="plate-meta-list">
+            <li><span>زیستگاه ارتفاعی:</span> <span class="val">۱,۶۰۰ تا ۲,۳۰۰ متر</span></li>
+            <li><span>طول عمر:</span> <span class="val">تا ۵۰۰ سال در دره‌های بکر</span></li>
+            <li><span>اثر بوم‌شناختی:</span> <span class="val">تغذیه سفره‌های آب زیرزمینی</span></li>
+          </ul>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Documentary Photography Gallery -->
+  <section id="gallery" class="editorial-section">
+    <div class="container">
+      <span class="section-tagline">CURATED VISUAL ARCHIVE</span>
+      <h2 class="section-heading-xl">نمایشگاه مستند جلوه‌های کوهستان ساورز</h2>
+      <p class="section-subtext">
+        تصاویر ثبت‌شده از دیواره‌های آهکی، یخچال‌های برفی، دشت لاله‌های واژگون و زندگی بومی عشایر در سرحدات ساورز. روی تصاویر کلیک کنید تا جزئیات و داده‌های ژئودتیک را مشاهده فرمایید.
+      </p>
+
+      <div class="gallery-editorial-grid">
+        <!-- Item 1 -->
+        <div class="gallery-item item-col-8" 
+             data-src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1600&q=85"
+             data-title="ستیغ صخره‌ای و خط‌الرأس ساورز در مه بامگاهی"
+             data-meta="ارتفاع ۳۱۵۰ متر • زوایای صخره‌ای آسماری • بهار زاگرس">
+          <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1200&q=80" alt="ستیغ ساورز">
+          <div class="gallery-overlay">
+            <span class="gallery-overlay-tag">PLATE 01 • RIDGE & PINNACLE</span>
+            <h4 class="gallery-overlay-title">ستیغ صخره‌ای و خط‌الرأس ساورز در مه بامگاهی</h4>
+          </div>
+        </div>
+
+        <!-- Item 2 -->
+        <div class="gallery-item item-col-4"
+             data-src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1600&q=85"
+             data-title="آبشار الوان و تنگه صخره‌ای طسوج"
+             data-meta="دره طسوج چرام • آبدهی دائمی کارست • ارتفاع ۲۳۰۰ متر">
+          <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80" alt="آبشار طسوج">
+          <div class="gallery-overlay">
+            <span class="gallery-overlay-tag">PLATE 02 • HYDROLOGY</span>
+            <h4 class="gallery-overlay-title">آبشار الوان و تنگه صخره‌ای طسوج</h4>
+          </div>
+        </div>
+
+        <!-- Item 3 -->
+        <div class="gallery-item item-col-4"
+             data-src="https://images.unsplash.com/photo-1518495973542-4542c06a5843?auto=format&fit=crop&w=1600&q=85"
+             data-title="دشت لاله‌های واژگون در ذوب برف‌های اردیبهشت"
+             data-meta="دامنه‌های شمالی ساورز • Fritillaria Imperialis">
+          <img src="https://images.unsplash.com/photo-1518495973542-4542c06a5843?auto=format&fit=crop&w=800&q=80" alt="لاله‌های واژگون">
+          <div class="gallery-overlay">
+            <span class="gallery-overlay-tag">PLATE 03 • FLORA HABITAT</span>
+            <h4 class="gallery-overlay-title">دشت لاله‌های واژگون در ذوب برف‌ها</h4>
+          </div>
+        </div>
+
+        <!-- Item 4 -->
+        <div class="gallery-item item-col-8"
+             data-src="https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&w=1600&q=85"
+             data-title="فلات دشت راق و چراگاه‌های مرتفع جاشیر"
+             data-meta="ارتفاع ۲۶۰۰ متر • سرحدات سادات و عشایر • پهنه ۵۰ هزار هکتار">
+          <img src="https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&w=1200&q=80" alt="دشت راق">
+          <div class="gallery-overlay">
+            <span class="gallery-overlay-tag">PLATE 04 • HIGH PLATEAU</span>
+            <h4 class="gallery-overlay-title">فلات دشت راق و چراگاه‌های مرتفع جاشیر</h4>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Essays & Archival Monograph -->
+  <section id="monograph" class="editorial-section" style="background: var(--bg-surface);">
+    <div class="container essay-split-grid">
+      <div class="essay-sticky-sidebar">
+        <span class="section-tagline">MONOGRAPH ESSAY</span>
+        <h2 class="section-heading-xl" style="font-size: 2.4rem;">روایت هیدرولوژی و فرهنگ ییلاقی ساورز</h2>
+        <p style="color: var(--accent-gold); font-size: 0.92rem; margin-top: 14px;">
+          نگارش: گروه پژوهش‌های جغرافیایی و مردم‌نگاری زاگرس
         </p>
-        <div class="hero-btns">
-          <a href="#products" class="btn-primary">
-            <span>مشاهده و خرید محصولات</span>
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <line x1="19" y1="12" x2="5" y2="12"></line>
-              <polyline points="12 19 5 12 12 5"></polyline>
-            </svg>
-          </a>
-          <a href="#heritage" class="btn-outline">کشف شگفتی‌های ساورز</a>
-        </div>
-
-        <div class="hero-stats">
-          <div class="stat-item">
-            <span class="stat-num">۳,۲۰۰+</span>
-            <span class="stat-label">متر ارتفاع قله</span>
-          </div>
-          <div class="stat-item">
-            <span class="stat-num">۱۰۰٪</span>
-            <span class="stat-label">خام و بدون افزودنی</span>
-          </div>
-          <div class="stat-item">
-            <span class="stat-num">۳۵۰</span>
-            <span class="stat-label">هزار هکتار پهنه بکر</span>
-          </div>
-          <div class="stat-item">
-            <span class="stat-num">۱.۱٪</span>
-            <span class="stat-label">حداکثر ساکارز عسل</span>
-          </div>
-        </div>
       </div>
 
-      <div class="hero-visual">
-        <div class="visual-card">
-          <div class="mountain-illustration">
-            <svg viewBox="0 0 400 300" width="100%" height="100%" style="position: absolute; inset: 0;">
-              <defs>
-                <linearGradient id="skyGrad" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0%" stop-color="#EBF4F6"/>
-                  <stop offset="60%" stop-color="#E1EDE5"/>
-                  <stop offset="100%" stop-color="#C5DECD"/>
-                </linearGradient>
-                <linearGradient id="peakGrad" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0%" stop-color="#E2EBE4"/>
-                  <stop offset="40%" stop-color="#8DA393"/>
-                  <stop offset="100%" stop-color="#3D5643"/>
-                </linearGradient>
-                <linearGradient id="foreGrad" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0%" stop-color="#4B6651"/>
-                  <stop offset="100%" stop-color="#243828"/>
-                </linearGradient>
-              </defs>
-              <rect width="400" height="300" fill="url(#skyGrad)"/>
-              <!-- Sun -->
-              <circle cx="310" cy="70" r="32" fill="#F8DEB5" opacity="0.8"/>
-              <!-- High Peaks -->
-              <polygon points="50,300 160,80 280,300" fill="url(#peakGrad)" opacity="0.85"/>
-              <polygon points="170,300 270,50 390,300" fill="url(#peakGrad)"/>
-              <polygon points="0,300 80,140 210,300" fill="url(#peakGrad)" opacity="0.7"/>
-              <!-- Snow Caps -->
-              <polygon points="270,50 250,90 270,82 290,95 285,75" fill="#FFFFFF" opacity="0.95"/>
-              <polygon points="160,80 145,115 160,108 175,120" fill="#FFFFFF" opacity="0.95"/>
-              <!-- Green Hills & Tulips -->
-              <path d="M-20,300 Q100,190 220,240 T420,220 L420,300 Z" fill="url(#foreGrad)"/>
-              <!-- Inverted Tulips / Flora dots -->
-              <circle cx="90" cy="240" r="4" fill="#C53A3A"/>
-              <circle cx="120" cy="265" r="5" fill="#D94B4B"/>
-              <circle cx="160" cy="245" r="4" fill="#C53A3A"/>
-              <circle cx="280" cy="255" r="5" fill="#D94B4B"/>
-              <circle cx="340" cy="240" r="4" fill="#C53A3A"/>
-            </svg>
-          </div>
+      <div class="essay-body">
+        <p class="essay-paragraph">
+          کوهستان ساورز تنها یک پدیده ژئومورفولوژیک نیست؛ بلکه یک <strong>برج آب طبیعی (Water Tower)</strong> و شریان حیات‌بخش در حوزه جنوب‌غربی ایران است. ساختار آهک‌های درشت‌دانه کارستی در خط‌الرأس ساورز به آب باران و برفاب‌های زمستانه اجازه می‌دهد در مخازن ژرف طبیعی ذخیره شده و از چشمه‌هایی نظیر سیب، وهل، چرنگی و سرچشمه طسوج با خلوص معدنی بالا در فصول گرم سال به دشت‌های تشنه چرام و سرفاریاب سرریز شوند.
+        </p>
 
-          <div class="floating-pill pill-1">
-            <span>🍯</span>
-            <span>عسل طبیعی وحشی ساورز</span>
-          </div>
+        <blockquote class="essay-blockquote">
+          «ساورز پس از دنا، پرآب‌ترین کوه کهگیلویه و بویراحمد است؛ شریان حیات ده‌ها طایفه اصیل و زیستگاه گونه‌هایی که نظیرشان در هیچ نقطه دیگری از خاورمیانه یافت نمی‌شود.»
+        </blockquote>
 
-          <div class="floating-pill pill-2">
-            <span>🌿</span>
-            <span>گیاه دارویی چویل و بیلهر</span>
-          </div>
-        </div>
+        <p class="essay-paragraph">
+          در پهنه مردم‌نگاری، دامنه‌های ساورز و فلات دشت راق از قرن‌ها پیش مامن ییلاق ایلات لر و طوایف سادات امامزاده علی (ع) و سادات میرسالار بوده است. ساختار سیاه چادرهای سنتی (بُهون)، نغمه‌های حماسی و لیریک «یار یار» و شیوه حفاظت بومی از مراتع جاشیر، الگویی کم‌نظیر از تعادل پایدار میان انسان و بوم‌سازگان کوهستان را شکل داده است.
+        </p>
       </div>
     </div>
   </section>
 
-  <!-- Mount Saverz Heritage Section -->
-  <section id="heritage" class="section section-alt">
+  <!-- Concierge & Research Inquiry -->
+  <section id="concierge" class="editorial-section">
     <div class="container">
-      <div class="section-header">
-        <span class="section-tag">SAVERZ HERITAGE</span>
-        <h2 class="section-title">میراث باشکوه و شگفتی‌های کوه ساورز</h2>
-        <p class="section-desc">نگاهی به زیست‌بوم غنی، چشمه‌سارهای جوشان و دامنه‌های تاریخی ساورز در قلب زاگرس جنوبی</p>
-      </div>
-
-      <div class="heritage-grid">
-        <div class="heritage-card">
-          <div class="heritage-icon">⛰️</div>
-          <h3>قله و خط‌الرأس ۳۲۰۰ متری</h3>
-          <p>امتداد بیش از ۳۰ کیلومتر صخره‌های سترگ آهکی که پس از دنا، پرآب‌ترین منبع آبی و برفی کهگیلویه و بویراحمد است.</p>
-        </div>
-
-        <div class="heritage-card">
-          <div class="heritage-icon">🌷</div>
-          <h3>دشت لاله‌های واژگون</h3>
-          <p>در فروردین و اردیبهشت، دامنه‌های ساورز فرشی سرخ‌فام از اشک مریم و گل‌های وحشی نایاب به نمایش می‌گذارند.</p>
-        </div>
-
-        <div class="heritage-card">
-          <div class="heritage-icon">🏞️</div>
-          <h3>بهشت ییلاقی طسوج</h3>
-          <p>باغات گردوی کهنسال، چنارهای غول‌پیکر، آبشار خروشان الوان طسوج و عمارت تاریخی هشت قاجاری در دامنه ساورز.</p>
-        </div>
-
-        <div class="heritage-card">
-          <div class="heritage-icon">🏕️</div>
-          <h3>فلات دشت راق و عشایر</h3>
-          <p>دشت مرتفع ۲۵۰۰ متری، زیستگاه اصیل ایل بختیاری و لر با چشمه‌های خنک سیب، وهل و رویشگاه وسیع جاشیر.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Products Catalog -->
-  <section id="products" class="section">
-    <div class="container">
-      <div class="section-header">
-        <span class="section-tag">SAVERZ NATURAL PRODUCTS</span>
-        <h2 class="section-title">فروشگاه محصولات ناب کوهستان ساورز</h2>
-        <p class="section-desc">تمامی محصولات با ضمانت برگه آزمایشگاهی و بسته‌بندی بهداشتی دست‌چین شده‌اند.</p>
-      </div>
-
-      <div style="max-width: 480px; margin: 0 auto 30px;">
-        <input type="text" id="product-search" class="form-control" placeholder="🔍 جستجو در نام محصول، خواص یا منطقه برداشت...">
-      </div>
-
-      <div class="category-filters">
-        <button class="filter-btn active" data-category="all">همه محصولات</button>
-        <button class="filter-btn" data-category="honey">عسل وحشی و کوهستان</button>
-        <button class="filter-btn" data-category="herbs">گیاهان دارویی و دمنوش‌ها</button>
-        <button class="filter-btn" data-category="dairy">لبنیات و خوراک اصیل</button>
-        <button class="filter-btn" data-category="crafts">صنایع دستی عشایر</button>
-      </div>
-
-      <div id="products-grid" class="products-grid">
-        <!-- Loaded via JS -->
-      </div>
-    </div>
-  </section>
-
-  <!-- Eco Tours Section -->
-  <section id="tours" class="section section-alt">
-    <div class="container">
-      <div class="section-header">
-        <span class="section-tag">SAVERZ EXPEDITIONS</span>
-        <h2 class="section-title">تورهای بوم‌گردی و کوهنوردی ساورز</h2>
-        <p class="section-desc">سفری رویایی به دل طبیعت بکر زاگرس با همراهی راهنماهای بومی و محلی</p>
-      </div>
-
-      <div class="tours-grid">
-        <div class="tour-card">
-          <div>
-            <div class="tour-header">
-              <span class="tour-tag">کوهنوردی تخصصی</span>
-              <span style="font-weight: 700; color: var(--color-amber);">۲ روزه</span>
-            </div>
-            <h3>صعود به خط‌الرأس و قله ساورز</h3>
-            <p style="font-size: 0.9rem; color: var(--text-muted);">پیمایش دیواره‌های صخره‌ای، تماشای چشم‌انداز ۳۶۰ درجه زاگرس جنوبی و کمپینگ شبانه زیر آسمان پرستاره.</p>
-            <ul class="tour-features">
-              <li>✔️ راهنمای مجرب فدراسیون و لیدر بومی</li>
-              <li>✔️ تجهیزات کمپینگ و ترابری محلی</li>
-              <li>✔️ وعده‌های غذایی سنتی و چای آویشن</li>
-            </ul>
-          </div>
-          <button class="btn-outline btn-book-tour" data-tour="صعود به قله ۳۲۰۰ متری ساورز" style="width: 100%; justify-content: center;">رزرو آنلاین این تور</button>
-        </div>
-
-        <div class="tour-card" style="border-color: var(--color-gold);">
-          <div>
-            <div class="tour-header">
-              <span class="tour-tag" style="background: #FFEAD2; color: #B35C1E;">طبیعت‌گردی و عکاسی</span>
-              <span style="font-weight: 700; color: var(--color-amber);">۱ روزه</span>
-            </div>
-            <h3>گشت لاله‌های واژگون و آبشار طسوج</h3>
-            <p style="font-size: 0.9rem; color: var(--text-muted);">پیاده‌روی در باغات کهنسال گردوی طسوج، بازدید از آبشار الوان و عکاسی در دشت رویایی لاله‌های واژگون.</p>
-            <ul class="tour-features">
-              <li>✔️ مناسب خانواده‌ها و تمام سنین</li>
-              <li>✔️ پذیرایی با نان تیری، سرشیر و عسل ساورز</li>
-              <li>✔️ راهنمای بومی تاریخچه طسوج و عمارت هشت</li>
-            </ul>
-          </div>
-          <button class="btn-primary btn-book-tour" data-tour="تور لاله‌های واژگون و آبشار طسوج" style="width: 100%; justify-content: center;">رزرو این تجربه</button>
-        </div>
-
-        <div class="tour-card">
-          <div>
-            <div class="tour-header">
-              <span class="tour-tag">زندگی عشایری</span>
-              <span style="font-weight: 700; color: var(--color-amber);">۲ روزه</span>
-            </div>
-            <h3>تجربه اقامت در سیاه چادرهای دشت راق</h3>
-            <p style="font-size: 0.9rem; color: var(--text-muted);">لمس اصیل‌ترین سبک زندگی ایل در ارتفاع ۲۵۰۰ متری، تجربه دوشیدن شیر، مشک‌زنی و نغمه‌های کهن لری.</p>
-            <ul class="tour-features">
-              <li>✔️ اقامت در بُهون (سیاه چادر پشم بز)</li>
-              <li>✔️ صبحانه و ناهار ارگانیک روغن حیوانی و کشک</li>
-              <li>✔️ آشنایی با گیاهان دارویی و چویل‌چینی</li>
-            </ul>
-          </div>
-          <button class="btn-outline btn-book-tour" data-tour="اقامت در سیاه چادر عشایر دشت راق" style="width: 100%; justify-content: center;">رزرو آنلاین این تور</button>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Zagros Journal & Stories -->
-  <section id="stories" class="section">
-    <div class="container">
-      <div class="section-header">
-        <span class="section-tag">ZAGROS JOURNAL</span>
-        <h2 class="section-title">روایت‌ها و داستان‌های زاگرس</h2>
-        <p class="section-desc">رازهای گیاهان افسانه‌ای، تاریخ عشایر و دانش بومی کوهستان ساورز</p>
-      </div>
-
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 28px;">
-        <article style="background: var(--bg-card); border-radius: var(--radius-md); padding: 24px; border: 1px solid var(--border-subtle);">
-          <span style="color: var(--color-amber); font-size: 0.8rem; font-weight: 700;">گیاه‌شناسی بومی • ۵ دقیقه مطالعه</span>
-          <h3 style="color: var(--color-primary); font-size: 1.25rem; margin: 10px 0;">چویل؛ عطر مقدس صخره‌های برف‌گیر</h3>
-          <p style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.7;">چرا عشایر زاگرس از هزاران سال پیش روغن حیوانی را در کیسه‌های چویل نگهداری می‌کردند؟ راز ماندگاری و خواص آنتی‌باکتریال شگفت‌انگیز این گیاه چیست؟</p>
-        </article>
-
-        <article style="background: var(--bg-card); border-radius: var(--radius-md); padding: 24px; border: 1px solid var(--border-subtle);">
-          <span style="color: var(--color-amber); font-size: 0.8rem; font-weight: 700;">کندوداری کوهستان • ۴ دقیقه مطالعه</span>
-          <h3 style="color: var(--color-primary); font-size: 1.25rem; margin: 10px 0;">راز ساکارز زیر ۱٪ عسل صخره‌های ساورز</h3>
-          <p style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.7;">در ارتفاع ۳۰۰۰ متری به دلیل نبود باغات دست‌کاشت و کشاورزی صنعتی، زنبورها منحصراً از گون‌های وحشی و آویشن کوهی تغذیه می‌کنند.</p>
-        </article>
-
-        <article style="background: var(--bg-card); border-radius: var(--radius-md); padding: 24px; border: 1px solid var(--border-subtle);">
-          <span style="color: var(--color-amber); font-size: 0.8rem; font-weight: 700;">تاریخ و معماری • ۶ دقیقه مطالعه</span>
-          <h3 style="color: var(--color-primary); font-size: 1.25rem; margin: 10px 0;">عمارت هشت طسوج؛ نگین ییلاقی قاجار</h3>
-          <p style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.7;">روایت استقرار خوانین کهگیلویه در سایه‌سار چنارهای چندصدساله طسوج و معماری سنگی و گچی هماهنگ با طبیعت کوه ساورز.</p>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <!-- Customer Reviews -->
-  <section id="reviews" class="section section-alt">
-    <div class="container">
-      <div class="section-header">
-        <span class="section-tag">TESTIMONIALS</span>
-        <h2 class="section-title">نظرات و تجربیات خریداران</h2>
-        <p class="section-desc">دیدگاه‌های واقعی مشتریانی که عطر و طعم ساورز را مهمان خانه‌هایشان کردند</p>
-      </div>
-
-      <div id="reviews-list" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px;">
-        <!-- Loaded via JS -->
-      </div>
-    </div>
-  </section>
-
-  <!-- Contact Section -->
-  <section id="contact" class="section">
-    <div class="container" style="max-width: 760px;">
-      <div class="section-header">
-        <span class="section-tag">CONNECT WITH SAVERZ</span>
-        <h2 class="section-title">تماس و ارتباط با گروه ساورز</h2>
-        <p class="section-desc">پرسشی درباره اصالت محصولات یا هماهنگی تورها دارید؟ با ما در تماس باشید.</p>
-      </div>
-
-      <form onsubmit="event.preventDefault(); showToast('پیام شما با موفقیت دریافت شد. کارشناسان ما به زودی با شما تماس می‌گیرند.'); this.reset();" style="background: var(--bg-card); padding: 32px; border-radius: var(--radius-lg); border: 1px solid var(--border-subtle); box-shadow: var(--shadow-sm);">
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
-          <div class="form-group">
-            <label class="form-label">نام و نام خانوادگی</label>
-            <input type="text" class="form-control" required placeholder="مثال: سهراب رحیمی">
-          </div>
-          <div class="form-group">
-            <label class="form-label">شماره همراه</label>
-            <input type="tel" class="form-control" required placeholder="۰۹۱۲۳۴۵۶۷۸۹">
-          </div>
-        </div>
-        <div class="form-group">
-          <label class="form-label">موضوع پیام</label>
-          <input type="text" class="form-control" required placeholder="خرید عمده / سوال درباره تور / مشاوره محصولات">
-        </div>
-        <div class="form-group">
-          <label class="form-label">متن پیام شما</label>
-          <textarea class="form-control" rows="4" required placeholder="پیام خود را بنویسید..."></textarea>
-        </div>
-        <button type="submit" class="btn-primary" style="width: 100%; justify-content: center;">ارسال پیام به ساورز</button>
-      </form>
-    </div>
-  </section>
-
-  <!-- Footer -->
-  <footer class="site-footer">
-    <div class="container">
-      <div class="footer-grid">
-        <div class="footer-col">
-          <h4 style="font-family: var(--font-serif); letter-spacing: 1px;">SAVERZ • ساورز</h4>
-          <p style="font-size: 0.88rem; line-height: 1.8; color: #A5B0A8; margin-bottom: 20px;">
-            برند اصیل فرآورده‌های ارگانیک کوه ساورز زاگرس. ما با تکیه بر دانش بومی عشایر و برداشت مستقیم از رویشگاه‌های صخره‌ای، ناب‌ترین محصولات طبیعت را با ضمانت آزمایشگاهی به دست شما می‌رسانیم.
+      <div class="concierge-card">
+        <div>
+          <span class="section-tagline">RESEARCH & EXPEDITIONS</span>
+          <h2 style="font-size: 2.2rem; font-weight: 800; color: var(--text-primary); margin-bottom: 16px;">
+            دبیرخانه پژوهش‌ها و اعزام هیئت‌های علمی
+          </h2>
+          <p style="color: var(--text-secondary); font-size: 1rem; line-height: 1.85; margin-bottom: 24px;">
+            اگر پژوهشگر گیاه‌شناسی، زمین‌شناس، مستندساز یا فعال محیط‌زیست هستید و نیاز به داده‌های میدانی، نمونه‌های هرباریومی یا هماهنگی راهنماهای بومی برای پیمایش ایمن خط‌الرأس ساورز دارید، با دبیرخانه مونوگراف در ارتباط باشید.
           </p>
+          <div style="font-size: 0.88rem; color: var(--text-muted); display: flex; flex-direction: column; gap: 8px;">
+            <span>📍 موقعیت پایگاه میدانی: کهگیلویه و بویراحمد، سرحدات ییلاقی طسوج</span>
+            <span>🌐 سامانه رسمی مونوگراف: saverz.shop</span>
+          </div>
         </div>
 
-        <div class="footer-col">
-          <h4>دسترسی سریع</h4>
-          <ul class="footer-links">
-            <li><a href="#products">عسل‌های کوهستان</a></li>
-            <li><a href="#products">گیاهان دارویی نایاب</a></li>
-            <li><a href="#tours">تورهای بوم‌گردی ساورز</a></li>
-            <li><a href="#stories">داستان‌های زاگرس</a></li>
-            <li><a href="/admin.html">ورود به پنل مدیریت</a></li>
-          </ul>
-        </div>
+        <form id="concierge-inquiry-form" class="concierge-form">
+          <div class="editorial-input-group">
+            <label class="editorial-label">نام و عنوان پژوهشگر / نهاد</label>
+            <input type="text" id="inquiry-name" class="editorial-input" required placeholder="مثال: دکتر اردوان کیانی • دانشگاه تهران">
+          </div>
 
-        <div class="footer-col">
-          <h4>اصالت و اعتماد</h4>
-          <ul class="footer-links">
-            <li>✔️ ضمانت برگه آزمایشگاهی ساکارز</li>
-            <li>✔️ بازگشت ۱۰۰٪ وجه در صورت عدم رضایت</li>
-            <li>✔️ بسته‌بندی دوست‌دار محیط زیست</li>
-            <li>✔️ حمایت از معیشت عشایر و بومیان</li>
-          </ul>
-        </div>
+          <div class="editorial-input-group">
+            <label class="editorial-label">شماره تماس یا ایمیل</label>
+            <input type="text" id="inquiry-phone" class="editorial-input" required placeholder="۰۹۱۲۳۴۵۶۷۸۹">
+          </div>
 
-        <div class="footer-col">
-          <h4>تماس با ساورز</h4>
-          <p style="font-size: 0.88rem; line-height: 1.8; color: #A5B0A8;">
-            📍 دفتر مرکزی: کهگیلویه و بویراحمد، چرام، سرفاریاب، جاده طسوج<br>
-            📞 پشتیبانی: ۰۹۱۷۰۰۰۰۰۰۰<br>
-            🌐 وبسایت: saverz.shop
-          </p>
+          <div class="editorial-input-group">
+            <label class="editorial-label">موضوع پژوهش یا درخواست</label>
+            <input type="text" id="inquiry-subject" class="editorial-input" required placeholder="مطالعه فلور آلپاین / عکاسی مستند / بررسی ژئومورفولوژی">
+          </div>
+
+          <div class="editorial-input-group">
+            <label class="editorial-label">شرح نیازمندی‌ها</label>
+            <textarea id="inquiry-message" class="editorial-input" rows="4" required placeholder="جزئیات برنامه پژوهشی، تاریخ احتمالی یا نیازمندی‌های داده‌ای..."></textarea>
+          </div>
+
+          <button type="submit" class="btn-editorial-primary" style="justify-content: center; width: 100%;">
+            ثبت و ارسال درخواست رسمی
+          </button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Editorial Footer -->
+  <footer class="editorial-footer">
+    <div class="container">
+      <div class="footer-top-row">
+        <div>
+          <span class="footer-logo">SAVERZ</span>
+          <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 6px;">مونوگراف مستند و پایگاه داده بوم‌شناختی کوهستان ساورز</p>
+        </div>
+        <div class="font-mono" style="color: var(--accent-gold); font-size: 0.85rem;">
+          ELEVATION: 3,200M | 30.8061° N, 50.8208° E
         </div>
       </div>
 
-      <div class="footer-bottom">
-        <span>تمامی حقوق مادی و معنوی متعلق به وبسایت رسمی SAVERZ.SHOP می‌باشد. طراحی‌شده با Rust.</span>
-        <span>Made with 🦀 Rust & Zagros Spirit</span>
+      <div class="footer-bottom-row">
+        <span>© تمامی حقوق اسنادی و بوم‌شناختی محفوظ است. Powered by High Performance Rust & Axum.</span>
+        <span>SAVERZ.SHOP • 2026</span>
       </div>
     </div>
   </footer>
 
-  <!-- Cart Drawer Overlay -->
-  <div id="cart-drawer-overlay" class="cart-drawer-overlay">
-    <div class="cart-drawer">
-      <div class="cart-drawer-header">
-        <h3>🛒 سبد خرید شما</h3>
-        <button id="close-cart-btn" class="btn-close-drawer">✕</button>
+  <!-- Lightbox Modal -->
+  <div id="lightbox-modal" class="lightbox-modal">
+    <div class="lightbox-content">
+      <div style="display: flex; justify-content: flex-end;">
+        <button id="lightbox-close" style="color: var(--text-secondary); font-size: 1.8rem; padding: 4px 10px;">✕</button>
       </div>
-      <div id="cart-drawer-items" class="cart-drawer-body">
-        <!-- Loaded via JS -->
+      <div class="lightbox-img-wrapper">
+        <img id="lightbox-img" src="" alt="بزرگنمایی تصویر">
       </div>
-      <div class="cart-drawer-footer">
-        <div class="cart-summary-row">
-          <span>مجموع اقلام:</span>
-          <span id="cart-total-amount" class="cart-total-num">۰ تومان</span>
-        </div>
-        <button id="btn-checkout" class="btn-checkout">تکمیل خرید و ثبت نهایی</button>
+      <div class="lightbox-caption">
+        <h4 id="lightbox-title" style="color: var(--text-primary); font-size: 1.2rem;"></h4>
+        <span id="lightbox-meta" class="font-mono" style="color: var(--accent-gold); font-size: 0.85rem;"></span>
       </div>
-    </div>
-  </div>
-
-  <!-- Checkout Modal -->
-  <div id="checkout-modal" class="modal-backdrop">
-    <div class="modal-box">
-      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
-        <h3 style="color: var(--color-primary); font-size: 1.3rem;">ثبت اطلاعات دریافت‌کننده</h3>
-        <button onclick="closeModal('checkout-modal')" class="btn-close-drawer">✕</button>
-      </div>
-
-      <form onsubmit="submitOrder(event)">
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px;">
-          <div class="form-group">
-            <label class="form-label">نام و نام خانوادگی *</label>
-            <input type="text" id="order-name" class="form-control" required placeholder="مثال: کوروش حسینی">
-          </div>
-          <div class="form-group">
-            <label class="form-label">شماره همراه *</label>
-            <input type="tel" id="order-phone" class="form-control" required placeholder="۰۹۱۲۳۴۵۶۷۸۹">
-          </div>
-        </div>
-
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px;">
-          <div class="form-group">
-            <label class="form-label">استان *</label>
-            <input type="text" id="order-province" class="form-control" required placeholder="مثال: تهران / کهگیلویه">
-          </div>
-          <div class="form-group">
-            <label class="form-label">شهر *</label>
-            <input type="text" id="order-city" class="form-control" required placeholder="مثال: تهران / یاسوج">
-          </div>
-        </div>
-
-        <div class="form-group">
-          <label class="form-label">آدرس دقیق پستی *</label>
-          <textarea id="order-address" class="form-control" rows="2" required placeholder="خیابان، کوچه، پلاک، واحد"></textarea>
-        </div>
-
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px;">
-          <div class="form-group">
-            <label class="form-label">کد پستی (اختیاری)</label>
-            <input type="text" id="order-postal" class="form-control" placeholder="۱۰ رقم">
-          </div>
-          <div class="form-group">
-            <label class="form-label">توضیحات ارسال</label>
-            <input type="text" id="order-note" class="form-control" placeholder="ساعت تحویل یا نکته خاص">
-          </div>
-        </div>
-
-        <button type="submit" id="btn-submit-order" class="btn-primary" style="width: 100%; justify-content: center; margin-top: 10px;">
-          تایید و ثبت نهایی سفارش
-        </button>
-      </form>
-    </div>
-  </div>
-
-  <!-- Order Success Modal -->
-  <div id="order-success-modal" class="modal-backdrop">
-    <div class="modal-box" style="text-align: center;">
-      <div style="font-size: 3.5rem; margin-bottom: 12px;">🎉</div>
-      <h3 style="color: var(--color-primary); font-size: 1.4rem; margin-bottom: 8px;">سفارش شما با موفقیت ثبت شد!</h3>
-      <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 20px;">از حسن انتخاب شما و حمایت از محصولات اصیل کوهستان ساورز سپاسگزاریم.</p>
-      
-      <div style="background: var(--bg-card-alt); padding: 16px; border-radius: var(--radius-md); margin-bottom: 24px; border: 1px dashed var(--color-gold);">
-        <span style="font-size: 0.85rem; color: var(--text-muted); display: block; margin-bottom: 4px;">کد رهگیری اختصاصی شما:</span>
-        <span id="success-tracking-code" style="font-size: 1.6rem; font-weight: 900; color: var(--color-primary); letter-spacing: 2px;">SVRZ-000000</span>
-      </div>
-
-      <button onclick="closeModal('order-success-modal')" class="btn-primary" style="width: 100%; justify-content: center;">
-        متوجه شدم و بازگشت به صفحه اصلی
-      </button>
-    </div>
-  </div>
-
-  <!-- Track Order Modal -->
-  <div id="track-modal" class="modal-backdrop">
-    <div class="modal-box">
-      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
-        <h3 style="color: var(--color-primary); font-size: 1.3rem;">استعلام و رهگیری سفارش</h3>
-        <button onclick="closeModal('track-modal')" class="btn-close-drawer">✕</button>
-      </div>
-
-      <form onsubmit="trackOrder(event)">
-        <div class="form-group">
-          <label class="form-label">شماره رهگیری (مانند SVRZ-123456) یا شماره موبایل:</label>
-          <div style="display: flex; gap: 10px;">
-            <input type="text" id="track-input" class="form-control" required placeholder="مثال: SVRZ-839210">
-            <button type="submit" class="btn-primary" style="padding: 0 20px;">استعلام</button>
-          </div>
-        </div>
-      </form>
-
-      <div id="track-result"></div>
-    </div>
-  </div>
-
-  <!-- Tour Booking Modal -->
-  <div id="tour-modal" class="modal-backdrop">
-    <div class="modal-box">
-      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
-        <h3 style="color: var(--color-primary); font-size: 1.3rem;">رزرو برنامه طبیعت‌گردی ساورز</h3>
-        <button onclick="closeModal('tour-modal')" class="btn-close-drawer">✕</button>
-      </div>
-
-      <form onsubmit="submitTourBooking(event)">
-        <input type="hidden" id="tour-name-input">
-        
-        <div class="form-group">
-          <label class="form-label">نام و نام خانوادگی سرپرست *</label>
-          <input type="text" id="tour-customer-name" class="form-control" required placeholder="مثال: بهنام مرادی">
-        </div>
-
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px;">
-          <div class="form-group">
-            <label class="form-label">شماره همراه تماس *</label>
-            <input type="tel" id="tour-phone" class="form-control" required placeholder="۰۹۱۲۳۴۵۶۷۸۹">
-          </div>
-          <div class="form-group">
-            <label class="form-label">تاریخ پیشنهادی سفر *</label>
-            <input type="text" id="tour-date" class="form-control" required placeholder="مثال: ۱۵ اردیبهشت">
-          </div>
-        </div>
-
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px;">
-          <div class="form-group">
-            <label class="form-label">تعداد همسفران *</label>
-            <input type="number" id="tour-guests" class="form-control" value="2" min="1" max="20" required>
-          </div>
-          <div class="form-group">
-            <label class="form-label">سطح آمادگی جسمانی</label>
-            <select id="tour-level" class="form-control">
-              <option value="مبتدی (طبیعت‌گردی سبک)">مبتدی (طبیعت‌گردی سبک)</option>
-              <option value="متوسط (کوهپیمایی)">متوسط (کوهپیمایی)</option>
-              <option value="حرفه‌ای (صعود ارتفاع بالا)">حرفه‌ای (صعود ارتفاع بالا)</option>
-            </select>
-          </div>
-        </div>
-
-        <div class="form-group">
-          <label class="form-label">توضیحات یا نیازمندی‌های خاص</label>
-          <textarea id="tour-note" class="form-control" rows="2" placeholder="تجهیزات همراه، رژیم غذایی یا نیازمندی خاص"></textarea>
-        </div>
-
-        <button type="submit" class="btn-primary" style="width: 100%; justify-content: center;">
-          ارسال و ثبت درخواست رزرو تور
-        </button>
-      </form>
     </div>
   </div>
 

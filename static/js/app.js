@@ -1,98 +1,156 @@
 /**
- * SAVERZ - Haute Editorial Interactive Architecture
- * Web Audio Ambient Soundscapes, Elevation Matrix & Archival Lightbox
+ * SAVERZ - SWISS ARCHITECTURAL & MATHEMATICAL PARTICLE ENGINE
+ * Gravitational Vector Field Canvas + Web Audio API Topographical Synthesizer
  */
 
 document.addEventListener('DOMContentLoaded', () => {
-  initElevationMatrix();
-  initAmbientSoundscape();
-  initGalleryLightbox();
-  initConciergeForm();
+  initParticleField();
+  initAudioPulse();
+  initLightbox();
+  initContactForm();
 });
 
 /* ==========================================================================
-   ELEVATION MATRIX ENGINE
+   MATHEMATICAL GRAVITATIONAL PARTICLE FIELD (HTML5 Canvas 2D)
+   Simulates 250+ vector nodes interacting with cursor physics and Euclidean lines
    ========================================================================== */
 
-const elevationZones = [
-  {
-    altitude: '۳,۲۰۰ متر',
-    latin: 'Pinnacle & Alpine Crest',
-    title: 'ستیغ صخره‌ای و خط‌الرأس ۳۲۰۰ متری ساورز',
-    desc: 'دیواره‌های استوار آهکی با امتدادی بیش از ۳۰ کیلومتر که مرز کهن چرام و بویراحمد را تشکیل می‌دهند. این منطقه در زمستان زیر خروارها برف مدفون است و در بهار به رویشگاه اصلی نادرترین گیاهان آلپاین مانند چویل، بیلهر و لاله‌های واژگون تبدیل می‌شود.',
-    climate: 'آلپاین بسیار سرد (یخچال‌های طبیعی)',
-    flora: 'چویل صخره‌ای، بیلهر، لاله واژگون، آویشن دنایی',
-    fauna: 'پلنگ زاگرس، کل و بز کوهی (پازن)، کبک دری، عقاب طلایی',
-    coordinates: '30°48′22″N 50°49′15″E',
-    waterSources: 'برف‌چال‌های دائمی و غارهای برفی',
-  },
-  {
-    altitude: '۲,۸۰۰ متر',
-    latin: 'Dasht-e Raq Plateau',
-    title: 'فلات مرتفع و چشمه‌سارهای دشت راق',
-    desc: 'فلاتی وسیع با وسعت ۵۰ هزار هکتار در ارتفاع ۲۸۰۰ متری. دشت راق از دیرباز کانون استقرار سیاه چادرهای عشایر اصیل لر، مراتع حاصلخیز گیاه جاشیر و سرچشمه اصلی چشمه‌های خنک سیب و چرنگی است که آبشار سهمگین تنگ‌مو را تغذیه می‌کنند.',
-    climate: 'ییلاقی معتدل کوهستانی با شب‌های سرد',
-    flora: 'علف جاشیر کوهی، موسیر وحشی، ریواس، کارده',
-    fauna: 'خرس قهوه‌ای زاگرس، گرگ خاکستری، روباه شنی، تشی',
-    coordinates: '30°46′10″N 50°52′40″E',
-    waterSources: 'چشمه سیب، چشمه وهل، چشمه چرنگی',
-  },
-  {
-    altitude: '۲,۴۰۰ متر',
-    latin: 'Tasooj Springs & Cascades',
-    title: 'دره چشمه‌سارها و آبشار الوان طسوج',
-    desc: 'تلاقی خروشان برفاب‌های ساورز در تنگه‌های صخره‌ای عمیق طسوج. آبشار الوان با ارتفاع چشمگیر در میان دیواره‌های پوشیده از خزه و پونه‌های خودرو فرو می‌ریزد و خنکای مطبوعی در دامنه‌ها پدید می‌آورد.',
-    climate: 'کوهپایه‌ای مرطوب و معتدل ییلاقی',
-    flora: 'پونه کنارآبی، بن‌سرخ (لیزک)، زرشک کوهی، زالزالک وحشی',
-    fauna: 'کبک چیل، شنگ رودخانه‌ای، تیهو، دلیجه',
-    coordinates: '30°43′55″N 50°47′30″E',
-    waterSources: 'آبشار الوان، رودخانه دائمی طسوج',
-  },
-  {
-    altitude: '۱,۸۰۰ متر',
-    latin: 'Ancient Foothills & Woodlands',
-    title: 'پایکوه و بیشه‌زارهای کهنسال طسوج و سرفاریاب',
-    desc: 'درختان چنار چندصدساله و جنگل‌های تنک بلوط ایرانی (دارمازو و برودار) که در پایکوه ساورز سایه افکنده‌اند. در این منطقه باغات کهنسال گردو و بقایای تاریخی عمارت هشت قاجاری گواهی بر سده‌ها همزیستی انسان با شکوه این کوهستان است.',
-    climate: 'معتدل مدیترانه‌ای زاگرسی',
-    flora: 'بلوط ایرانی، گردوی کهنسال، بادام کوهی (اهلوک)، ارژن',
-    fauna: 'سنجاب ایرانی (سنجاب بلوط)، گراز وحشی، جغد شاخدار',
-    coordinates: '30°41′18″N 50°45′05″E',
-    waterSources: 'حوضه آبخیز مارون و خیرآباد',
+function initParticleField() {
+  const canvas = document.getElementById('particle-canvas');
+  if (!canvas) return;
+
+  const ctx = canvas.getContext('2d');
+  let width, height;
+  let particles = [];
+  const particleCount = window.innerWidth < 768 ? 60 : 120;
+  const maxDistance = 140;
+  
+  const mouse = {
+    x: -1000,
+    y: -1000,
+    radius: 180,
+    active: false
+  };
+
+  function resize() {
+    width = canvas.width = window.innerWidth;
+    height = canvas.height = window.innerHeight;
   }
-];
 
-function initElevationMatrix() {
-  const buttons = document.querySelectorAll('.matrix-nav-btn');
-  const titleElem = document.getElementById('matrix-title');
-  const descElem = document.getElementById('matrix-desc');
-  const climateElem = document.getElementById('matrix-climate');
-  const floraElem = document.getElementById('matrix-flora');
-  const faunaElem = document.getElementById('matrix-fauna');
-  const coordsElem = document.getElementById('matrix-coords');
-  const waterElem = document.getElementById('matrix-water');
-  const latinElem = document.getElementById('matrix-latin');
-
-  buttons.forEach((btn, index) => {
-    btn.addEventListener('click', () => {
-      buttons.forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-
-      const data = elevationZones[index];
-      if (titleElem) titleElem.textContent = data.title;
-      if (descElem) descElem.textContent = data.desc;
-      if (climateElem) climateElem.textContent = data.climate;
-      if (floraElem) floraElem.textContent = data.flora;
-      if (faunaElem) faunaElem.textContent = data.fauna;
-      if (coordsElem) coordsElem.textContent = data.coordinates;
-      if (waterElem) waterElem.textContent = data.waterSources;
-      if (latinElem) latinElem.textContent = data.latin;
-    });
+  window.addEventListener('resize', () => {
+    resize();
+    createParticles();
   });
+
+  window.addEventListener('mousemove', (e) => {
+    mouse.x = e.clientX;
+    mouse.y = e.clientY;
+    mouse.active = true;
+  });
+
+  window.addEventListener('mouseleave', () => {
+    mouse.active = false;
+    mouse.x = -1000;
+    mouse.y = -1000;
+  });
+
+  class Particle {
+    constructor() {
+      this.x = Math.random() * width;
+      this.y = Math.random() * height;
+      this.baseX = this.x;
+      this.baseY = this.y;
+      this.vx = (Math.random() - 0.5) * 0.45;
+      this.vy = (Math.random() - 0.5) * 0.45;
+      this.radius = Math.random() * 1.8 + 1;
+      this.density = (Math.random() * 30) + 1;
+      this.alpha = Math.random() * 0.4 + 0.3;
+      this.angle = Math.random() * 360;
+    }
+
+    update() {
+      // Natural organic wave drift
+      this.angle += 0.01;
+      this.x += this.vx + Math.sin(this.angle) * 0.2;
+      this.y += this.vy + Math.cos(this.angle) * 0.2;
+
+      // Screen boundaries wrap
+      if (this.x < 0) this.x = width;
+      if (this.x > width) this.x = 0;
+      if (this.y < 0) this.y = height;
+      if (this.y > height) this.y = 0;
+
+      // Mouse Gravitational & Repulsive Vector Math
+      if (mouse.active) {
+        const dx = mouse.x - this.x;
+        const dy = mouse.y - this.y;
+        const distance = Math.sqrt(dx * dx + dy * dy);
+
+        if (distance < mouse.radius) {
+          const forceDirectionX = dx / distance;
+          const forceDirectionY = dy / distance;
+          const force = (mouse.radius - distance) / mouse.radius;
+          const directionX = forceDirectionX * force * this.density * 0.8;
+          const directionY = forceDirectionY * force * this.density * 0.8;
+
+          this.x -= directionX;
+          this.y -= directionY;
+        }
+      }
+    }
+
+    draw() {
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(184, 142, 86, ${this.alpha})`;
+      ctx.fill();
+    }
+  }
+
+  function createParticles() {
+    particles = [];
+    for (let i = 0; i < particleCount; i++) {
+      particles.push(new Particle());
+    }
+  }
+
+  function connectParticles() {
+    for (let a = 0; a < particles.length; a++) {
+      for (let b = a + 1; b < particles.length; b++) {
+        const dx = particles[a].x - particles[b].x;
+        const dy = particles[a].y - particles[b].y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+
+        if (dist < maxDistance) {
+          const opacity = (1 - (dist / maxDistance)) * 0.22;
+          ctx.beginPath();
+          ctx.strokeStyle = `rgba(184, 142, 86, ${opacity})`;
+          ctx.lineWidth = 0.75;
+          ctx.moveTo(particles[a].x, particles[a].y);
+          ctx.lineTo(particles[b].x, particles[b].y);
+          ctx.stroke();
+        }
+      }
+    }
+  }
+
+  function animate() {
+    ctx.clearRect(0, 0, width, height);
+    for (let i = 0; i < particles.length; i++) {
+      particles[i].update();
+      particles[i].draw();
+    }
+    connectParticles();
+    requestAnimationFrame(animate);
+  }
+
+  resize();
+  createParticles();
+  animate();
 }
 
 /* ==========================================================================
-   SYNTHESIZED AMBIENT MOUNTAIN SOUNDSCAPE (Web Audio API)
-   Generates soothing high-altitude wind breeze & crystal water stream natively
+   WEB AUDIO API MOUNTAIN ACOUSTIC PULSE
    ========================================================================== */
 
 let audioCtx = null;
@@ -100,14 +158,14 @@ let isAudioPlaying = false;
 let noiseNode = null;
 let gainNode = null;
 
-function initAmbientSoundscape() {
-  const toggleBtn = document.getElementById('audio-toggle-btn');
-  const waveElem = document.getElementById('audio-wave-bars');
-  const statusElem = document.getElementById('audio-status-text');
+function initAudioPulse() {
+  const btn = document.getElementById('btn-audio-pulse');
+  const dot = document.getElementById('audio-pulse-dot');
+  const label = document.getElementById('audio-pulse-text');
 
-  if (!toggleBtn) return;
+  if (!btn) return;
 
-  toggleBtn.addEventListener('click', () => {
+  btn.addEventListener('click', () => {
     if (!audioCtx) {
       const AudioContext = window.AudioContext || window.webkitAudioContext;
       audioCtx = new AudioContext();
@@ -118,23 +176,22 @@ function initAmbientSoundscape() {
     }
 
     if (!isAudioPlaying) {
-      startSoundscape();
+      startAmbientAudio();
       isAudioPlaying = true;
-      if (waveElem) waveElem.classList.remove('paused');
-      if (statusElem) statusElem.textContent = 'طنین کوهستان (فعال)';
+      if (dot) dot.classList.remove('paused');
+      if (label) label.textContent = 'طنین ساورز (فعال)';
     } else {
-      stopSoundscape();
+      stopAmbientAudio();
       isAudioPlaying = false;
-      if (waveElem) waveElem.classList.add('paused');
-      if (statusElem) statusElem.textContent = 'طنین کوهستان (خاموش)';
+      if (dot) dot.classList.add('paused');
+      if (label) label.textContent = 'طنین ساورز';
     }
   });
 }
 
-function startSoundscape() {
+function startAmbientAudio() {
   if (!audioCtx) return;
 
-  // Pink noise buffer for deep wind breeze
   const bufferSize = audioCtx.sampleRate * 2;
   const noiseBuffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
   const output = noiseBuffer.getChannelData(0);
@@ -148,7 +205,7 @@ function startSoundscape() {
     b3 = 0.86650 * b3 + white * 0.3104856;
     b4 = 0.55000 * b4 + white * 0.5329522;
     b5 = -0.7616 * b5 - white * 0.0168980;
-    output[i] = (b0 + b1 + b2 + b3 + b4 + b5 + b6 + white * 0.5362) * 0.04;
+    output[i] = (b0 + b1 + b2 + b3 + b4 + b5 + b6 + white * 0.5362) * 0.035;
     b6 = white * 0.115926;
   }
 
@@ -156,14 +213,13 @@ function startSoundscape() {
   noiseNode.buffer = noiseBuffer;
   noiseNode.loop = true;
 
-  // Lowpass filter for muffled high mountain wind
   const filter = audioCtx.createBiquadFilter();
   filter.type = 'lowpass';
-  filter.frequency.setValueAtTime(320, audioCtx.currentTime);
+  filter.frequency.setValueAtTime(280, audioCtx.currentTime);
 
   gainNode = audioCtx.createGain();
-  gainNode.gain.setValueAtTime(0.01, audioCtx.currentTime);
-  gainNode.gain.exponentialRampToValueAtTime(0.35, audioCtx.currentTime + 2);
+  gainNode.gain.setValueAtTime(0.001, audioCtx.currentTime);
+  gainNode.gain.exponentialRampToValueAtTime(0.3, audioCtx.currentTime + 1.5);
 
   noiseNode.connect(filter);
   filter.connect(gainNode);
@@ -172,7 +228,7 @@ function startSoundscape() {
   noiseNode.start();
 }
 
-function stopSoundscape() {
+function stopAmbientAudio() {
   if (gainNode && audioCtx) {
     gainNode.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 0.5);
     setTimeout(() => {
@@ -185,47 +241,47 @@ function stopSoundscape() {
 }
 
 /* ==========================================================================
-   GALLERY LIGHTBOX ENGINE
+   DOCUMENTARY LIGHTBOX
    ========================================================================== */
 
-function initGalleryLightbox() {
-  const lightbox = document.getElementById('lightbox-modal');
-  const imgElem = document.getElementById('lightbox-img');
-  const titleElem = document.getElementById('lightbox-title');
-  const metaElem = document.getElementById('lightbox-meta');
+function initLightbox() {
+  const modal = document.getElementById('lightbox-modal');
+  const img = document.getElementById('lightbox-img');
+  const title = document.getElementById('lightbox-title');
+  const tag = document.getElementById('lightbox-tag');
   const closeBtn = document.getElementById('lightbox-close');
 
-  if (!lightbox) return;
+  if (!modal) return;
 
-  document.querySelectorAll('.gallery-item').forEach(item => {
-    item.addEventListener('click', () => {
-      const src = item.dataset.src;
-      const title = item.dataset.title;
-      const meta = item.dataset.meta;
+  document.querySelectorAll('.photo-frame').forEach(frame => {
+    frame.addEventListener('click', () => {
+      const src = frame.dataset.src;
+      const t = frame.dataset.title;
+      const tg = frame.dataset.tag;
 
-      if (imgElem) imgElem.src = src;
-      if (titleElem) titleElem.textContent = title;
-      if (metaElem) metaElem.textContent = meta;
+      if (img) img.src = src;
+      if (title) title.textContent = t;
+      if (tag) tag.textContent = tg;
 
-      lightbox.classList.add('open');
+      modal.classList.add('open');
     });
   });
 
   if (closeBtn) {
-    closeBtn.addEventListener('click', () => lightbox.classList.remove('open'));
+    closeBtn.addEventListener('click', () => modal.classList.remove('open'));
   }
 
-  lightbox.addEventListener('click', (e) => {
-    if (e.target === lightbox) lightbox.classList.remove('open');
+  modal.addEventListener('click', (e) => {
+    if (e.target === modal) modal.classList.remove('open');
   });
 }
 
 /* ==========================================================================
-   CONCIERGE & RESEARCH INQUIRY
+   CONTACT / CONCIERGE FORM
    ========================================================================== */
 
-function initConciergeForm() {
-  const form = document.getElementById('concierge-inquiry-form');
+function initContactForm() {
+  const form = document.getElementById('swiss-inquiry-form');
   if (!form) return;
 
   form.addEventListener('submit', async (e) => {
@@ -233,7 +289,7 @@ function initConciergeForm() {
     const btn = form.querySelector('button[type="submit"]');
     const originalText = btn.textContent;
     btn.disabled = true;
-    btn.textContent = 'در حال ارسال درخواست...';
+    btn.textContent = 'در حال ارسال پیام...';
 
     const payload = {
       name: document.getElementById('inquiry-name').value,
@@ -250,13 +306,13 @@ function initConciergeForm() {
       });
       const data = await res.json();
       if (data.success) {
-        alert('درخواست شما در دبیرخانه مونوگراف ساورز ثبت شد. با شما تماس گرفته خواهد شد.');
+        alert('پیام شما با موفقیت ثبت شد. سپاس از توجه شما به مونوگراف ساورز.');
         form.reset();
       } else {
-        alert('خطا در ارسال درخواست.');
+        alert('خطا در ارسال پیام.');
       }
     } catch (err) {
-      alert('خطا در برقراری ارتباط.');
+      alert('خطا در ارسال پیام.');
     } finally {
       btn.disabled = false;
       btn.textContent = originalText;

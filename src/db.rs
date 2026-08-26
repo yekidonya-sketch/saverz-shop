@@ -360,27 +360,25 @@ impl Database {
 
     pub fn get_products(&self, category: Option<String>) -> Result<Vec<Product>> {
         let conn = self.get_conn()?;
-        let query = match &category {
-            Some(cat) if !cat.is_empty() && cat != "all" => {
-                "SELECT id, title, category, price, discount_price, short_desc, full_desc, weight, stock, rating, reviews_count, badges_json, icon_type, in_stock, harvest_region, altitude FROM products WHERE category = ?1 ORDER BY id ASC"
-            }
-            _ => {
-                "SELECT id, title, category, price, discount_price, short_desc, full_desc, weight, stock, rating, reviews_count, badges_json, icon_type, in_stock, harvest_region, altitude FROM products ORDER BY id ASC"
-            }
-        };
-
-        let mut stmt = conn.prepare(query)?;
-        let rows = if let Some(cat) = category {
-            if !cat.is_empty() && cat != "all" {
-                stmt.query_map(params![cat], |row| Self::row_to_product(row))?
-            } else {
-                stmt.query_map([], |row| Self::row_to_product(row))?
-            }
-        } else {
-            stmt.query_map([], |row| Self::row_to_product(row))?
-        };
-
         let mut products = Vec::new();
+
+        if let Some(cat) = category {
+            if !cat.is_empty() && cat != "all" {
+                let mut stmt = conn.prepare(
+                    "SELECT id, title, category, price, discount_price, short_desc, full_desc, weight, stock, rating, reviews_count, badges_json, icon_type, in_stock, harvest_region, altitude FROM products WHERE category = ?1 ORDER BY id ASC"
+                )?;
+                let rows = stmt.query_map(params![cat], |row| Self::row_to_product(row))?;
+                for r in rows {
+                    products.push(r?);
+                }
+                return Ok(products);
+            }
+        }
+
+        let mut stmt = conn.prepare(
+            "SELECT id, title, category, price, discount_price, short_desc, full_desc, weight, stock, rating, reviews_count, badges_json, icon_type, in_stock, harvest_region, altitude FROM products ORDER BY id ASC"
+        )?;
+        let rows = stmt.query_map([], |row| Self::row_to_product(row))?;
         for r in rows {
             products.push(r?);
         }
